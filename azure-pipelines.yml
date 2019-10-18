@@ -44,6 +44,16 @@ steps:
       $version = "$(Build.SourceBranchName)"
       $commitMessage = "$service ($version)"
       Write-Host $commitMessage
+
+- task: PowerShell@2
+  displayName: before tagging
+  inputs:
+    targetType: inline
+    script: |
+      Write-Host "This task was added before tagging"
+
+ 
+    
       
     
     
