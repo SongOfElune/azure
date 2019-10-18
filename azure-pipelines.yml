@@ -52,6 +52,13 @@ steps:
     script: |
       Write-Host "This task was added before tagging"
 
+- task: PowerShell@2
+  displayName: after tagging
+  inputs:
+    targetType: inline
+    script: |
+      Write-Host "This task was added after tagging" 
+
  
     
       
