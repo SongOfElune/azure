@@ -7,7 +7,7 @@ trigger: none
 # pr: none
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'macos-10.14'
 
 steps:
 - script: echo Hello, world!
@@ -58,6 +58,13 @@ steps:
     targetType: inline
     script: |
       Write-Host "This task was added after tagging" 
+
+- task: Bash@3
+  displayName: LS
+  inputs:
+   targetType: inline
+   script: |
+     ls -la /users
 
  
     
