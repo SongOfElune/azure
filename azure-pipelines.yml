@@ -65,6 +65,9 @@ steps:
    targetType: inline
    script: |
      ls -la /users
+     ls -la /users/runner
+     brew install tree
+     tree /users
 
  
     
