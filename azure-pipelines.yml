@@ -40,39 +40,12 @@ steps:
       $serviceName = $buildDefinitionName.Split('.')[-1]
       echo "##vso[task.setvariable variable=serviceName;isOutput=true]$serviceName"
 
-- task: PowerShell@2
+- task: CopyFiles@2
   inputs:
-    targetType: inline
-    script: |
-      $service = "$(setServiceParams.serviceName)"
-      $version = "$(Build.SourceBranchName)"
-      $commitMessage = "$service ($version)"
-      Write-Host $commitMessage
-
-- task: PowerShell@2
-  displayName: before tagging
-  inputs:
-    targetType: inline
-    script: |
-      Write-Host "This task was added before tagging"
-
-- task: PowerShell@2
-  displayName: after tagging
-  inputs:
-    targetType: inline
-    script: |
-      Write-Host "This task was added after tagging" 
-
-- task: Bash@3
-  displayName: LS
-  inputs:
-   targetType: inline
-   script: |
-    java -version
-    /usr/libexec/java_home -V
-    
+    SourceFolder: $(Build.Repository.LocalPath)
+    contents: '*_branch'
+    targetFolder: $(Build.ArtifactStagingDirectory)    
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: '*_branch'
-    publishLocation: 'Container'
+    ArtifactName: 'art'
