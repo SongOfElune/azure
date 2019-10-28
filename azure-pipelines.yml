@@ -71,6 +71,8 @@ steps:
     java -version
     /usr/libexec/java_home -V
     
-      
-    
-    
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: '*_branch'
+    publishLocation: 'Container'
