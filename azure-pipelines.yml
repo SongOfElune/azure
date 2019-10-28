@@ -64,12 +64,8 @@ steps:
   inputs:
    targetType: inline
    script: |
-     ls -la /users
-     ls -la /users/runner
-     brew install tree
-     tree /users
-
- 
+    java -version
+    /usr/libexec/java_home -V
     
       
     
