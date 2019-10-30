@@ -36,10 +36,11 @@ steps:
     echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
   name: SetBuildVars
 
-- powershell: 
+- powershell: |
     Write-Host $(SetBuildVars.buildType)
     Write-Host $(SetBuildVars.buildConfiguration)
     Write-Host $(SetBuildVars.fastlaneBuildCommand)
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
