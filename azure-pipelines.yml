@@ -29,7 +29,7 @@ steps:
           $buildConfiguration = "Release_Dev";
           $buildType = "Stg" 
       }
-
+    }
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
