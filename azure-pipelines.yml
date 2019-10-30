@@ -17,6 +17,19 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+- powershell: |
+    switch ("$(MAPEnvName)") {
+      'cvp-dev' { 
+          $fastlaneBuildCommand = "fastlane appface_build_dev";
+          $buildConfiguration = "Release_Dev";
+          $buildType = "Dev" 
+      }
+      'cvp-stg' { 
+          $fastlaneBuildCommand = "fastlane appface_build_stg";
+          $buildConfiguration = "Release_Dev";
+          $buildType = "Stg" 
+      }
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
