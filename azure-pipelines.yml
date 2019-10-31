@@ -8,14 +8,6 @@ trigger: none
 
 pool:
   vmImage: 'macos-10.14'
-variables:
-  buildVars:
-    cvp-dev:
-      buildType: dev
-      buildConfig: Debug
-    cvp-stg:
-      buildType: stg
-      buildConfig: Debug
 
 steps:
 
@@ -23,10 +15,28 @@ steps:
   displayName: 'Run a one-line script'
 
 - powershell: |
-    Write-Output $buildVars.$(MapEnvName).buildType
-    Write-Output $buildVars.$(MapEnvName).buildConfig
+    $configParams = @{
+        "cvp-dev" = @{"buildType" = "Dev";  "buildConfiguration" = "Debug"};
+        "cvp-stg" = @{"buildType" = "Stg";  "buildConfiguration" = "Debug"};
+        "cvp-uat" = @{"buildType" = "Uat";  "buildConfiguration" = "Debug"};
+        "cvp"     = @{"buildType" = "Prod"; "buildConfiguration" = "Release"};
+        "cvp-ept" = @{"buildType" = "Ept";  "buildConfiguration" = "Debug"};
+        "pla-pit" = @{"buildType" = "Dev";  "buildConfiguration" = "Debug"};
+        "pla-mgr" = @{"buildType" = "Prod"; "buildConfiguration" = "Release"};
+        "pla-dev" = @{"buildType" = "Prod";  "buildConfiguration" = "Release"};
+        "pla-stg" = @{"buildType" = "Dev";  "buildConfiguration" = "Debug"};
+        "pla-uat" = @{"buildType" = "Prod";  "buildConfiguration" = "Release"};
+        "vst-dev" = @{"buildType" = "Dev";  "buildConfiguration" = "Debug"};
+    }
+    echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$configParams.$(MAPEnvName).buildConfiguration"
+    echo "##vso[task.setvariable variable=buildType;isOutput=true]$configParams.$(MAPEnvName).buildType"
   displayName: Show vars
+  name: TestDict
 
+- powershell: |
+    Write-Output $(TestDict.buildType)
+    Write-Output $(TestDict.buildConfiguration)
+  displayName: Show test
 - task: PowerShell@2
   name: SetBuildVariables
   displayName: Set environment-related variables
