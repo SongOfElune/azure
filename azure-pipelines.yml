@@ -86,6 +86,8 @@ steps:
 - bash: |
     echo "$(Build.QueuedBy) - $(SetBuildVars.buildType) - $(SetBuildVars.buildConfiguration) - $(SetBuildVars.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
 
+- bash: echo $(MobileAppPackageUri)
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: $(Build.Repository.LocalPath)
