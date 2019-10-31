@@ -8,12 +8,24 @@ trigger: none
 
 pool:
   vmImage: 'macos-10.14'
+variables:
+  buildVars:
+    cvp-dev:
+      buildType: dev
+      buildConfig: Debug
+    cvp-stg:
+      buildType: stg
+      buildConfig: Debug
 
 steps:
 
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+- powershell: |
+    Write-Output $buildVars.$(MapEnvName).buildType
+    Write-Output $buildVars.$(MapEnvName).buildConfig
+  displayName: Show vars
 
 - task: PowerShell@2
   name: SetBuildVariables
