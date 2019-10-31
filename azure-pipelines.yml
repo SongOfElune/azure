@@ -10,66 +10,88 @@ pool:
   vmImage: 'macos-10.14'
 
 steps:
-- script: git checkout develop
-
-- script: ls | grep *_branch
 
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- powershell: |
-    switch ("$(MAPEnvName)") {
-      'cvp-dev' { 
-          $fastlaneBuildCommand = "fastlane appface_build_dev";
-          $buildConfiguration = "Release_Dev";
-          $buildType = "Dev" 
+
+- task: PowerShell@2
+  name: SetBuildVariables
+  displayName: Set environment-related variables
+  inputs:
+    targetType: inline
+    script: |
+      switch ("$(MAPEnvName)") {
+        'cvp-dev' { 
+            $fastlaneBuildCommand = "fastlane appface_build_dev";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Dev" 
+        }
+        'cvp-stg' { 
+            $fastlaneBuildCommand = "fastlane appface_build_stg";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Stg" 
+        }
+        'cvp-uat' { 
+            $fastlaneBuildCommand = "fastlane appface_build_uat";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Uat" 
+        }
+        'cvp' { 
+            $fastlaneBuildCommand = "fastlane appface_build_prod";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Prod" 
+        }
+        'pla-pit' {
+            $fastlaneBuildCommand = "fastlane appface_build_prod";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Prod" 
+        }
+        'pla-mgr' {
+            $fastlaneBuildCommand = "fastlane appface_build_prod";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Prod" 
+        }
+        'pla-dev' {
+            $fastlaneBuildCommand = "fastlane appface_build_prod";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Prod" 
+        }
+        'pla-stg' {
+            $fastlaneBuildCommand = "fastlane appface_build_dev";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Dev" 
+        }
+        'pla-uat' {
+            $fastlaneBuildCommand = "fastlane appface_build_prod";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Prod" 
+        }  
+        'vst-dev' { 
+            $fastlaneBuildCommand = "fastlane appface_build_dev";
+            $buildConfiguration = "Release_Dev";
+            $buildType = "Dev" 
+        }
       }
-      'cvp-stg' { 
-          $fastlaneBuildCommand = "fastlane appface_build_stg";
-          $buildConfiguration = "Release_Dev";
-          $buildType = "Stg" 
-      }
-    }
-    
-    echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
-    echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
-    echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
-  name: SetBuildVars
+
+      echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
+      echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
+      echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
 
 - powershell: |
     Write-Host $(SetBuildVars.buildType)
     Write-Host $(SetBuildVars.buildConfiguration)
     Write-Host $(SetBuildVars.fastlaneBuildCommand)
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-- script: |
-    echo "Show vars"
-    echo "Definition name" 
-    echo $(Build.DefinitionName)
-    echo "Source branch"
-    echo $(Build.SourceBranch)
-    echo "Source branch name"
-    echo $(Build.SourceBranchName)
-
-- task: PowerShell@2
-  name: setServiceParams
-  inputs:
-    targetType: inline
-    script: |
-      $buildDefinitionName = "BrightBoxHQ.Remoto.iOS.AuthService"
-      $serviceName = $buildDefinitionName.Split('.')[-1]
-      echo "##vso[task.setvariable variable=serviceName;isOutput=true]$serviceName"
+- bash: |
+    echo "$(Build.QueuedBy) - $(SetBuildVars.buildType) - $(SetBuildVars.buildConfiguration) - $(SetBuildVars.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
 
 - task: CopyFiles@2
   inputs:
     SourceFolder: $(Build.Repository.LocalPath)
-    contents: '*_branch'
+    contents: 'build.txt'
     targetFolder: $(Build.ArtifactStagingDirectory)    
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'art'
+    ArtifactName: 'build_artifact'
