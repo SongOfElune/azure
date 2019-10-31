@@ -29,8 +29,8 @@ steps:
         "vst-dev" = @{"buildType" = "Dev";  "buildConfiguration" = "Debug"};
     }
 
-    $buildType = $configParams.$(MAPEnvName).buildType
-    $buildConfiguration = $configParams.$(MAPEnvName).buildConfiguration
+    $buildType = $configParams."$(MAPEnvName)".buildType
+    $buildConfiguration = $configParams."$(MAPEnvName)".buildConfiguration
     echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
     echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
   displayName: Show vars
