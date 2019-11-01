@@ -28,11 +28,15 @@ steps:
         "pla-uat" = @{"buildType" = "Prod";  "buildConfiguration" = "Release"};
         "vst-dev" = @{"buildType" = "Dev";  "buildConfiguration" = "Debug"};
     }
-
-    # $buildType = $configParams."$(MAPEnvName)".buildType
-    # $buildConfiguration = $configParams."$(MAPEnvName)".buildConfiguration
-    echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$configParams.'$(MAPEnvName)'.buildConfiguration"
-    echo "##vso[task.setvariable variable=buildType;isOutput=true]$configParams.'$(MAPEnvName)'.buildType"
+    if ("$(MAPEnvName)" -In $configParams.Keys) {
+        $buildType = $configParams."$(MAPEnvName)".buildType
+        $buildConfiguration = $configParams."$(MAPEnvName)".buildConfiguration
+        echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
+        echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
+    }
+    else {
+        Write-Error "Could not find build configuration settings for the provided environment: $(MAPEnvName)"
+    }
   displayName: Show vars
   name: TestDict
 
