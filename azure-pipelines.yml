@@ -44,9 +44,9 @@ steps:
   name: TestDict
 
 - powershell: |
-    Write-Output $(TestDict.buildType)
-    Write-Output $(TestDict.buildConfiguration)
-    Write-Output $(TestDict.fastlaneBuildCommand)
+    Write-Output "$(TestDict.buildType)"
+    Write-Output "$(TestDict.buildConfiguration)"
+    Write-Output "$(TestDict.fastlaneBuildCommand)"
   displayName: Show test
 - task: PowerShell@2
   name: SetBuildVariables
