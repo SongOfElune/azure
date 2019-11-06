@@ -16,6 +16,8 @@ pool:
 
 steps:
 
+- script: pod repo list
+
 - script: mkdir $(AdvancedBuildDir) && echo 'hello world' > $(HelloWorldFilePath)
 
 - script: cat $(HelloWorldFilePath)
