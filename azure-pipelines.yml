@@ -6,127 +6,136 @@
 trigger: none
 # pr: none
 
+variables:
+  BuildUserHomeDir: /Users/runner
+  AdvancedBuildDir: $(BuildUserHomeDir)/n
+  HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
+
 pool:
   vmImage: 'macos-10.14'
 
 steps:
 
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: echo 'hello world' > $(HelloWorldFilePath)
 
-- powershell: |
-    $configParams = @{
-            "cvp-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
-            "cvp-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_stg"; "buildConfiguration" = "Release_Dev"; "buildType" = "Stg"}
-            "cvp-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
-            "cvp"     = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-            "cvp-ept" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
-            "pla-pit" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-            "pla-mgr" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-            "pla-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-            "pla-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
-            "pla-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}  
-            "vst-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
-          }
+- script: cat $(HelloWorldFilePath)
 
-          if ("$(MAPEnvName)" -In $configParams.Keys) {
-            $buildType = $configParams."$(MAPEnvName)".buildType
-            $buildConfiguration = $configParams."$(MAPEnvName)".buildConfiguration
-            $fastlaneBuildCommand = $configParams."$(MAPEnvName)".fastlaneBuildCommand
-            echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
-            echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
-            echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
-          }
-          else {
-            Write-Error "Could not find build configuration settingt for the $(MAPEnvName) env"
-          }
-  displayName: Show vars
-  name: TestDict
+# - script: echo Hello, world!
+#   displayName: 'Run a one-line script'
 
-- powershell: |
-    Write-Output "$(TestDict.buildType)"
-    Write-Output "$(TestDict.buildConfiguration)"
-    Write-Output "$(TestDict.fastlaneBuildCommand)"
-  displayName: Show test
-- task: PowerShell@2
-  name: SetBuildVariables
-  displayName: Set environment-related variables
-  inputs:
-    targetType: inline
-    script: |
-      switch ("$(MAPEnvName)") {
-        'cvp-dev' { 
-            $fastlaneBuildCommand = "fastlane appface_build_dev";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Dev" 
-        }
-        'cvp-stg' { 
-            $fastlaneBuildCommand = "fastlane appface_build_stg";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Stg" 
-        }
-        'cvp-uat' { 
-            $fastlaneBuildCommand = "fastlane appface_build_uat";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Uat" 
-        }
-        'cvp' { 
-            $fastlaneBuildCommand = "fastlane appface_build_prod";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Prod" 
-        }
-        'pla-pit' {
-            $fastlaneBuildCommand = "fastlane appface_build_prod";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Prod" 
-        }
-        'pla-mgr' {
-            $fastlaneBuildCommand = "fastlane appface_build_prod";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Prod" 
-        }
-        'pla-dev' {
-            $fastlaneBuildCommand = "fastlane appface_build_prod";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Prod" 
-        }
-        'pla-stg' {
-            $fastlaneBuildCommand = "fastlane appface_build_dev";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Dev" 
-        }
-        'pla-uat' {
-            $fastlaneBuildCommand = "fastlane appface_build_prod";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Prod" 
-        }  
-        'vst-dev' { 
-            $fastlaneBuildCommand = "fastlane appface_build_dev";
-            $buildConfiguration = "Release_Dev";
-            $buildType = "Dev" 
-        }
-      }
+# - powershell: |
+#     $configParams = @{
+#             "cvp-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
+#             "cvp-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_stg"; "buildConfiguration" = "Release_Dev"; "buildType" = "Stg"}
+#             "cvp-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
+#             "cvp"     = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+#             "cvp-ept" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
+#             "pla-pit" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+#             "pla-mgr" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+#             "pla-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+#             "pla-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
+#             "pla-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}  
+#             "vst-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
+#           }
 
-      echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
-      echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
-      echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
+#           if ("$(MAPEnvName)" -In $configParams.Keys) {
+#             $buildType = $configParams."$(MAPEnvName)".buildType
+#             $buildConfiguration = $configParams."$(MAPEnvName)".buildConfiguration
+#             $fastlaneBuildCommand = $configParams."$(MAPEnvName)".fastlaneBuildCommand
+#             echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
+#             echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
+#             echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
+#           }
+#           else {
+#             Write-Error "Could not find build configuration settingt for the $(MAPEnvName) env"
+#           }
+#   displayName: Show vars
+#   name: TestDict
 
-- powershell: |
-    Write-Host $(SetBuildVariables.buildType)
-    Write-Host $(SetBuildVariables.buildConfiguration)
-    Write-Host $(SetBuildVariables.fastlaneBuildCommand)
+# - powershell: |
+#     Write-Output "$(TestDict.buildType)"
+#     Write-Output "$(TestDict.buildConfiguration)"
+#     Write-Output "$(TestDict.fastlaneBuildCommand)"
+#   displayName: Show test
+# - task: PowerShell@2
+#   name: SetBuildVariables
+#   displayName: Set environment-related variables
+#   inputs:
+#     targetType: inline
+#     script: |
+#       switch ("$(MAPEnvName)") {
+#         'cvp-dev' { 
+#             $fastlaneBuildCommand = "fastlane appface_build_dev";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Dev" 
+#         }
+#         'cvp-stg' { 
+#             $fastlaneBuildCommand = "fastlane appface_build_stg";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Stg" 
+#         }
+#         'cvp-uat' { 
+#             $fastlaneBuildCommand = "fastlane appface_build_uat";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Uat" 
+#         }
+#         'cvp' { 
+#             $fastlaneBuildCommand = "fastlane appface_build_prod";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Prod" 
+#         }
+#         'pla-pit' {
+#             $fastlaneBuildCommand = "fastlane appface_build_prod";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Prod" 
+#         }
+#         'pla-mgr' {
+#             $fastlaneBuildCommand = "fastlane appface_build_prod";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Prod" 
+#         }
+#         'pla-dev' {
+#             $fastlaneBuildCommand = "fastlane appface_build_prod";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Prod" 
+#         }
+#         'pla-stg' {
+#             $fastlaneBuildCommand = "fastlane appface_build_dev";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Dev" 
+#         }
+#         'pla-uat' {
+#             $fastlaneBuildCommand = "fastlane appface_build_prod";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Prod" 
+#         }  
+#         'vst-dev' { 
+#             $fastlaneBuildCommand = "fastlane appface_build_dev";
+#             $buildConfiguration = "Release_Dev";
+#             $buildType = "Dev" 
+#         }
+#       }
 
-- bash: |
-    echo "$(Build.QueuedBy) - $(SetBuildVariables.buildType) - $(SetBuildVariables.buildConfiguration) - $(SetBuildVariables.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
+#       echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
+#       echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
+#       echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
 
-- bash: echo $(MobileAppPackageUri)
+# - powershell: |
+#     Write-Host $(SetBuildVariables.buildType)
+#     Write-Host $(SetBuildVariables.buildConfiguration)
+#     Write-Host $(SetBuildVariables.fastlaneBuildCommand)
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: $(Build.Repository.LocalPath)
-    contents: 'build.txt'
-    targetFolder: $(Build.ArtifactStagingDirectory)    
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'build_artifact'
+# - bash: |
+#     echo "$(Build.QueuedBy) - $(SetBuildVariables.buildType) - $(SetBuildVariables.buildConfiguration) - $(SetBuildVariables.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
+
+# - bash: echo $(MobileAppPackageUri)
+
+# - task: CopyFiles@2
+#   inputs:
+#     SourceFolder: $(Build.Repository.LocalPath)
+#     contents: 'build.txt'
+#     targetFolder: $(Build.ArtifactStagingDirectory)    
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     ArtifactName: 'build_artifact'
