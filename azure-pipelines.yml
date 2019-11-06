@@ -16,7 +16,7 @@ pool:
 
 steps:
 
-- script: echo 'hello world' > $(HelloWorldFilePath)
+- script: mkdir $(AdvancedBuildDir) && echo 'hello world' > $(HelloWorldFilePath)
 
 - script: cat $(HelloWorldFilePath)
 
