@@ -22,6 +22,10 @@ steps:
 
 - script: cat $(HelloWorldFilePath)
 
+- task: CocoaPods@0
+  inputs:
+   forceRepoUpdate: false
+
 # - script: echo Hello, world!
 #   displayName: 'Run a one-line script'
 
