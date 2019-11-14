@@ -15,6 +15,14 @@ pool:
   vmImage: 'macos-10.14'
 
 steps:
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: CocoaPodsSpecs
+
+- script: |
+    ls $(Pipeline.Workspace)
+    cd CocoaPodsSpecs
+    pwd
 
 - script: xcodebuild -version
 
