@@ -28,9 +28,9 @@ steps:
 
 - script: pod repo list
 
-- script: pod repo add master https://github.com/CocoaPods/Specs.git
+# - script: pod repo add master https://github.com/CocoaPods/Specs.git
 
-- script: pod repo list
+# - script: pod repo list
 - task: CocoaPods@0
   inputs:
    forceRepoUpdate: false
