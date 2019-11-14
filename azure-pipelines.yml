@@ -24,9 +24,6 @@ steps:
     project: 'anab'
     pipelineId: 9
     buildVersionToDownload: 'latest'
-- task: DownloadPipelineArtifact@2
-  inputs:
-    artifact: 
 
 - script: |
     ls $(Pipeline.Workspace)
