@@ -16,7 +16,7 @@ pool:
 
 steps:
 
-- script: mkdir /Users/runner/.cocoapods/repos/master
+- script: mkdir -p /Users/runner/.cocoapods/repos/master
 
 - task: DownloadPipelineArtifact@2
   inputs:
