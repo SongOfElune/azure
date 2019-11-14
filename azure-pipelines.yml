@@ -16,14 +16,23 @@ pool:
 
 steps:
 
+# - task: DownloadPipelineArtifact@2
+#   inputs:
+#     buildType: 'specific'
+#     artifact: 'CocoaPodsSpecs'
+#     targetPath: $(Build.SourcesDirectory)
+#     project: '286ed725-931e-4b49-8500-727d3e09f9d1'
+#     definition: '9'
+#     buildVersionToDownload: 'latest'
+
+
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'specific'
-    artifact: 'CocoaPodsSpecs'
-    targetPath: $(Build.SourcesDirectory)/bin
-    project: 'anab'
-    pipelineId: 9
+    project: '286ed725-931e-4b49-8500-727d3e09f9d1'
+    definition: '9'
     buildVersionToDownload: 'latest'
+    targetPath: '$(Pipeline.Workspace)'
 
 - script: |
     ls $(Pipeline.Workspace)
