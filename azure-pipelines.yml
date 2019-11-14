@@ -16,6 +16,7 @@ pool:
 
 steps:
 
+script: mkdir /Users/runner/.cocoapods/repos/master
 
 - task: DownloadPipelineArtifact@2
   inputs:
@@ -23,7 +24,7 @@ steps:
     project: '286ed725-931e-4b49-8500-727d3e09f9d1'
     definition: '9'
     buildVersionToDownload: 'latest'
-    targetPath: '~/.cocoapods/repos/master/'
+    targetPath: '/Users/runner/.cocoapods/repos/master/'
 
 - script: pod repo list
 
@@ -36,6 +37,8 @@ steps:
 
 # - script: echo Hello, world!
 #   displayName: 'Run a one-line script'
+# '$(Pipeline.Workspace)'
+# ln -s /Users/anab/Desktop/bb ~/bb
 
 # - powershell: |
 #     $configParams = @{
