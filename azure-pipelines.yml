@@ -21,7 +21,7 @@ steps:
   - bash: |
       ls /Applications | grep Xcode
       ls /Applications
-      sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer
+      sudo xcode-select -s /Applications/Xcode_11.2.1.app/Contents/Developer
       echo "Show xcodebuild version"
       xcodebuild -version
 
