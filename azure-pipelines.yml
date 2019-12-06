@@ -18,6 +18,13 @@ steps:
 
   - script: xcodebuild -version
 
+  - bash: |
+      ls /Applications | grep Xcode
+      ls /Applications
+      sudo xcode-select -s /Applications/Xcode_11.app/Contents/Developer
+      echo "Show xcodebuild version"
+      xcodebuild -version
+
 # - script: mkdir -p /Users/runner/.cocoapods/repos/master
 
 # - task: DownloadPipelineArtifact@2
