@@ -10,12 +10,18 @@ variables:
   BuildUserHomeDir: /Users/runner
   AdvancedBuildDir: $(BuildUserHomeDir)/n
   HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
+  envName: dev
 
 pool:
   vmImage: 'macos-10.14'
 
 steps:
+  - script: echo $(Build.DefinitionName)
 
+  - script: echo $(Build.BuildId)
+
+  - script: echo $(Build.BuildNumber)
+  
   - script: xcodebuild -version
 
   - bash: |
