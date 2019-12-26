@@ -11,13 +11,14 @@ variables:
   AdvancedBuildDir: $(BuildUserHomeDir)/n
   HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
   envName: dev
+  svc: $(Build.SourceVersionMessage)
 
 pool:
   vmImage: 'macos-10.14'
 
 steps:
   - powershell: |
-      $buildMessage = "$(Build.SourceVersionMessage)"
+      $buildMessage = $(svc)
       Write-Output $buildMessage
       
   - script: echo $(Build.DefinitionName)
