@@ -16,6 +16,10 @@ pool:
   vmImage: 'macos-10.14'
 
 steps:
+  - powershell: |
+      $buildMessage = "$(Build.SourceVersionMessage)"
+      Write-Output $buildMessage
+      
   - script: echo $(Build.DefinitionName)
 
   - script: echo $(Build.BuildId)
