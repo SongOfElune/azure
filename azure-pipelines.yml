@@ -18,7 +18,7 @@ pool:
 
 steps:
   - powershell: |
-      $buildMessage = $(svc)
+      $buildMessage = "$(svc)"
       Write-Output $buildMessage
       
   - script: echo $(Build.DefinitionName)
