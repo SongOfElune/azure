@@ -17,6 +17,7 @@ pool:
   vmImage: 'macos-10.14'
 
 steps:
+  - powershell: env
   - powershell: |
       $buildMessage = "$(svc)"
       Write-Output $buildMessage
