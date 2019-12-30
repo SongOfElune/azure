@@ -18,11 +18,14 @@ pool:
 steps:
   - powershell: env
   - powershell: |
-      $buildMessage = (git log -1 --pretty=%B)[0]
+      $buildMessage = (git log -1 --pretty=%B).Split()
+      
       Write-Output $buildMessage
       Write-Output $buildMessage.GetType()
-      $buildType, $buildService, $buildVersion = $buildMessage.Split(' ')
-      $buildVersion = $buildVersion.Trim('()')
+
+      $buildType = $buildMessage[0]
+      $buildService = $buildMessage[1]
+      $buildVersion = $buildMessage[2].Trim('()')
 
       Write-Output $buildMessage
       Write-Output $buildVersion
