@@ -11,7 +11,6 @@ variables:
   AdvancedBuildDir: $(BuildUserHomeDir)/n
   HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
   envName: dev
-  svc: $(Build.SourceVersionMessage)
 
 pool:
   vmImage: 'macos-10.14'
@@ -19,21 +18,27 @@ pool:
 steps:
   - powershell: env
   - powershell: |
-      $buildMessage = "$(svc)"
+      $buildMessage = (git log -1 --pretty=%B)[0]
+      $buildType, $buildService, $buildVersion = $buildMessage.Split(' ')
+      $buildVersion = $buildVersion.Trim('()')
+
       Write-Output $buildMessage
-      
-  - script: echo $(Build.DefinitionName)
+      Write-Output $buildVersion
+      Write-Output $buildType
+      Write-Output $buildService 
 
-  - script: echo $(Build.BuildId)
+  # - script: echo $(Build.DefinitionName)
 
-  - script: echo $(Build.BuildNumber)
+  # - script: echo $(Build.BuildId)
+
+  # - script: echo $(Build.BuildNumber)
   
-  - script: xcodebuild -version
+  # - script: xcodebuild -version
 
-  - bash: |
-      sudo xcode-select -s /Applications/Xcode_11.2.1.app/Contents/Developer
-      echo "Show xcodebuild version"
-      xcodebuild -version
+  # - bash: |
+  #     sudo xcode-select -s /Applications/Xcode_11.2.1.app/Contents/Developer
+  #     echo "Show xcodebuild version"
+  #     xcodebuild -version
 
 # - script: mkdir -p /Users/runner/.cocoapods/repos/master
 
