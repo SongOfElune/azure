@@ -19,6 +19,8 @@ steps:
   - powershell: env
   - powershell: |
       $buildMessage = (git log -1 --pretty=%B)[0]
+      Write-Output $buildMessage
+      Write-Output $buildMessage.GetType()
       $buildType, $buildService, $buildVersion = $buildMessage.Split(' ')
       $buildVersion = $buildVersion.Trim('()')
 
