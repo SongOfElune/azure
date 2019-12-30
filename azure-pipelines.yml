@@ -27,10 +27,12 @@ steps:
       $buildService = $buildMessage[1]
       $buildVersion = $buildMessage[2].Trim('()')
 
-      Write-Output $buildMessage
-      Write-Output $buildVersion
-      Write-Output $buildType
-      Write-Output $buildService 
+      Write-Output "Commit message - $buildMessage"
+      Write-Output "Build type - $buildType"
+      Write-Output "Build service - $buildService" 
+      Write-Output "Build version - $buildVersion"
+      
+      
 
   # - script: echo $(Build.DefinitionName)
 
