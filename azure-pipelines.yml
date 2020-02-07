@@ -31,6 +31,20 @@ steps:
       Write-Output "Build type - $buildType"
       Write-Output "Build service - $buildService" 
       Write-Output "Build version - $buildVersion"
+  
+  - task: PythonScript@0
+    name: UpdateVersionNumber
+    displayName: Set version number
+    inputs:
+     script: |
+      # buildNumber = "20200201.20"
+      date, counter = $(Build.BuildNumber)".split(".")
+      while len(counter) < 3: counter = "0" + counter
+      appfaceBuildNumber = date + counter
+      print(appfaceBuildNumber)
+      echo "##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber"
+
+  - script: echo $(UpdateVersionNumber.buildNumger)
       
       
 
