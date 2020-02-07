@@ -32,11 +32,11 @@ steps:
       Write-Output "Build service - $buildService" 
       Write-Output "Build version - $buildVersion"
   
-  - task: PythonScript@0
+  - task: PowerShell@2
     name: UpdateVersionNumber
     displayName: Set version number
     inputs:
-      scriptSource: inline
+      targetType: inline
       script: |
         $date = "20200204.21"
         $date, $buildCounter = $date.Split(".")
