@@ -44,7 +44,7 @@ steps:
         $buildNumber = "$date" + "$buildCounter"
         ##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber
 
-  - script: echo $(UpdateVersionNumber.buildNumber)
+  - script: echo "$(UpdateVersionNumber.buildNumber)"
       
       
 
