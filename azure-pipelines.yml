@@ -12,195 +12,198 @@ variables:
   HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
   envName: dev
   Version.MajorMinor: 2020
-  Version.Revision: $[counter(variables['Version.MajorMinor'], 0)
+  a: $[counter(20, 100)]
 
 pool:
   vmImage: 'macos-10.14'
 
 steps:
-  - script: echo $(Version.Revision)
-  - powershell: env
-  - powershell: |
-      $buildMessage = (git log -1 --pretty=%B).Split()
+  - bash: echo $(a)
+
+# steps:
+#   - script: echo $()
+#   - powershell: env
+#   - powershell: |
+#       $buildMessage = (git log -1 --pretty=%B).Split()
       
-      Write-Output $buildMessage
-      Write-Output $buildMessage.GetType()
+#       Write-Output $buildMessage
+#       Write-Output $buildMessage.GetType()
 
-      $buildType = $buildMessage[0]
-      $buildService = $buildMessage[1]
-      $buildVersion = $buildMessage[2].Trim('()')
+#       $buildType = $buildMessage[0]
+#       $buildService = $buildMessage[1]
+#       $buildVersion = $buildMessage[2].Trim('()')
 
-      Write-Output "Commit message - $buildMessage"
-      Write-Output "Build type - $buildType"
-      Write-Output "Build service - $buildService" 
-      Write-Output "Build version - $buildVersion"
+#       Write-Output "Commit message - $buildMessage"
+#       Write-Output "Build type - $buildType"
+#       Write-Output "Build service - $buildService" 
+#       Write-Output "Build version - $buildVersion"
   
-  - task: PowerShell@2
-    name: UpdateVersionNumber
-    displayName: Set version number
-    inputs:
-      targetType: inline
-      script: |
-        # $date = "20200204.21"
-        $date, $buildCounter = "$(Build.BuildNumber)".Split(".")
-        while ($buildCounter.Length -lt 3) {$buildCounter = "0" + $buildCounter}
-        $buildNumber = "$date" + "$buildCounter"
-        echo "##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber"
+#   - task: PowerShell@2
+#     name: UpdateVersionNumber
+#     displayName: Set version number
+#     inputs:
+#       targetType: inline
+#       script: |
+#         # $date = "20200204.21"
+#         $date, $buildCounter = "$(Build.BuildNumber)".Split(".")
+#         while ($buildCounter.Length -lt 3) {$buildCounter = "0" + $buildCounter}
+#         $buildNumber = "$date" + "$buildCounter"
+#         echo "##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber"
 
-  - script: echo "$(UpdateVersionNumber.buildNumber)"
+#   - script: echo "$(UpdateVersionNumber.buildNumber)"
       
       
 
-  # - script: echo $(Build.DefinitionName)
+#   # - script: echo $(Build.DefinitionName)
 
-  # - script: echo $(Build.BuildId)
+#   # - script: echo $(Build.BuildId)
 
-  # - script: echo $(Build.BuildNumber)
+#   # - script: echo $(Build.BuildNumber)
   
-  # - script: xcodebuild -version
+#   # - script: xcodebuild -version
 
-  # - bash: |
-  #     sudo xcode-select -s /Applications/Xcode_11.2.1.app/Contents/Developer
-  #     echo "Show xcodebuild version"
-  #     xcodebuild -version
+#   # - bash: |
+#   #     sudo xcode-select -s /Applications/Xcode_11.2.1.app/Contents/Developer
+#   #     echo "Show xcodebuild version"
+#   #     xcodebuild -version
 
-# - script: mkdir -p /Users/runner/.cocoapods/repos/master
+# # - script: mkdir -p /Users/runner/.cocoapods/repos/master
 
-# - task: DownloadPipelineArtifact@2
-#   inputs:
-#     buildType: 'specific'
-#     project: '286ed725-931e-4b49-8500-727d3e09f9d1'
-#     definition: '9'
-#     buildVersionToDownload: 'latest'
-#     targetPath: '/Users/runner/.cocoapods/repos/master/'
+# # - task: DownloadPipelineArtifact@2
+# #   inputs:
+# #     buildType: 'specific'
+# #     project: '286ed725-931e-4b49-8500-727d3e09f9d1'
+# #     definition: '9'
+# #     buildVersionToDownload: 'latest'
+# #     targetPath: '/Users/runner/.cocoapods/repos/master/'
 
-# - script: pod repo list
+# # - script: pod repo list
 
-# - script: pod repo add master https://github.com/CocoaPods/Specs.git
+# # - script: pod repo add master https://github.com/CocoaPods/Specs.git
 
-# - script: pod repo list
-# - task: CocoaPods@0
-#   inputs:
-#    forceRepoUpdate: false
+# # - script: pod repo list
+# # - task: CocoaPods@0
+# #   inputs:
+# #    forceRepoUpdate: false
 
-# - script: echo Hello, world!
-#   displayName: 'Run a one-line script'
-# '$(Pipeline.Workspace)'
-# ln -s /Users/anab/Desktop/bb ~/bb
+# # - script: echo Hello, world!
+# #   displayName: 'Run a one-line script'
+# # '$(Pipeline.Workspace)'
+# # ln -s /Users/anab/Desktop/bb ~/bb
 
-# - powershell: |
-#     $configParams = @{
-#             "cvp-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
-#             "cvp-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_stg"; "buildConfiguration" = "Release_Dev"; "buildType" = "Stg"}
-#             "cvp-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
-#             "cvp"     = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-#             "cvp-ept" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
-#             "pla-pit" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-#             "pla-mgr" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-#             "pla-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
-#             "pla-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
-#             "pla-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}  
-#             "vst-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
-#           }
+# # - powershell: |
+# #     $configParams = @{
+# #             "cvp-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
+# #             "cvp-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_stg"; "buildConfiguration" = "Release_Dev"; "buildType" = "Stg"}
+# #             "cvp-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
+# #             "cvp"     = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+# #             "cvp-ept" = @{"fastlaneBuildCommand" = "fastlane appface_build_uat"; "buildConfiguration" = "Release_Dev"; "buildType" = "Uat"}
+# #             "pla-pit" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+# #             "pla-mgr" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+# #             "pla-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}
+# #             "pla-stg" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
+# #             "pla-uat" = @{"fastlaneBuildCommand" = "fastlane appface_build_prod"; "buildConfiguration" = "Release_Dev"; "buildType" = "Prod"}  
+# #             "vst-dev" = @{"fastlaneBuildCommand" = "fastlane appface_build_dev"; "buildConfiguration" = "Release_Dev"; "buildType" = "Dev"}
+# #           }
 
-#           if ("$(MAPEnvName)" -In $configParams.Keys) {
-#             $buildType = $configParams."$(MAPEnvName)".buildType
-#             $buildConfiguration = $configParams."$(MAPEnvName)".buildConfiguration
-#             $fastlaneBuildCommand = $configParams."$(MAPEnvName)".fastlaneBuildCommand
-#             echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
-#             echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
-#             echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
-#           }
-#           else {
-#             Write-Error "Could not find build configuration settingt for the $(MAPEnvName) env"
-#           }
-#   displayName: Show vars
-#   name: TestDict
+# #           if ("$(MAPEnvName)" -In $configParams.Keys) {
+# #             $buildType = $configParams."$(MAPEnvName)".buildType
+# #             $buildConfiguration = $configParams."$(MAPEnvName)".buildConfiguration
+# #             $fastlaneBuildCommand = $configParams."$(MAPEnvName)".fastlaneBuildCommand
+# #             echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
+# #             echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
+# #             echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
+# #           }
+# #           else {
+# #             Write-Error "Could not find build configuration settingt for the $(MAPEnvName) env"
+# #           }
+# #   displayName: Show vars
+# #   name: TestDict
 
-# - powershell: |
-#     Write-Output "$(TestDict.buildType)"
-#     Write-Output "$(TestDict.buildConfiguration)"
-#     Write-Output "$(TestDict.fastlaneBuildCommand)"
-#   displayName: Show test
-# - task: PowerShell@2
-#   name: SetBuildVariables
-#   displayName: Set environment-related variables
-#   inputs:
-#     targetType: inline
-#     script: |
-#       switch ("$(MAPEnvName)") {
-#         'cvp-dev' { 
-#             $fastlaneBuildCommand = "fastlane appface_build_dev";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Dev" 
-#         }
-#         'cvp-stg' { 
-#             $fastlaneBuildCommand = "fastlane appface_build_stg";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Stg" 
-#         }
-#         'cvp-uat' { 
-#             $fastlaneBuildCommand = "fastlane appface_build_uat";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Uat" 
-#         }
-#         'cvp' { 
-#             $fastlaneBuildCommand = "fastlane appface_build_prod";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Prod" 
-#         }
-#         'pla-pit' {
-#             $fastlaneBuildCommand = "fastlane appface_build_prod";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Prod" 
-#         }
-#         'pla-mgr' {
-#             $fastlaneBuildCommand = "fastlane appface_build_prod";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Prod" 
-#         }
-#         'pla-dev' {
-#             $fastlaneBuildCommand = "fastlane appface_build_prod";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Prod" 
-#         }
-#         'pla-stg' {
-#             $fastlaneBuildCommand = "fastlane appface_build_dev";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Dev" 
-#         }
-#         'pla-uat' {
-#             $fastlaneBuildCommand = "fastlane appface_build_prod";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Prod" 
-#         }  
-#         'vst-dev' { 
-#             $fastlaneBuildCommand = "fastlane appface_build_dev";
-#             $buildConfiguration = "Release_Dev";
-#             $buildType = "Dev" 
-#         }
-#       }
+# # - powershell: |
+# #     Write-Output "$(TestDict.buildType)"
+# #     Write-Output "$(TestDict.buildConfiguration)"
+# #     Write-Output "$(TestDict.fastlaneBuildCommand)"
+# #   displayName: Show test
+# # - task: PowerShell@2
+# #   name: SetBuildVariables
+# #   displayName: Set environment-related variables
+# #   inputs:
+# #     targetType: inline
+# #     script: |
+# #       switch ("$(MAPEnvName)") {
+# #         'cvp-dev' { 
+# #             $fastlaneBuildCommand = "fastlane appface_build_dev";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Dev" 
+# #         }
+# #         'cvp-stg' { 
+# #             $fastlaneBuildCommand = "fastlane appface_build_stg";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Stg" 
+# #         }
+# #         'cvp-uat' { 
+# #             $fastlaneBuildCommand = "fastlane appface_build_uat";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Uat" 
+# #         }
+# #         'cvp' { 
+# #             $fastlaneBuildCommand = "fastlane appface_build_prod";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Prod" 
+# #         }
+# #         'pla-pit' {
+# #             $fastlaneBuildCommand = "fastlane appface_build_prod";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Prod" 
+# #         }
+# #         'pla-mgr' {
+# #             $fastlaneBuildCommand = "fastlane appface_build_prod";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Prod" 
+# #         }
+# #         'pla-dev' {
+# #             $fastlaneBuildCommand = "fastlane appface_build_prod";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Prod" 
+# #         }
+# #         'pla-stg' {
+# #             $fastlaneBuildCommand = "fastlane appface_build_dev";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Dev" 
+# #         }
+# #         'pla-uat' {
+# #             $fastlaneBuildCommand = "fastlane appface_build_prod";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Prod" 
+# #         }  
+# #         'vst-dev' { 
+# #             $fastlaneBuildCommand = "fastlane appface_build_dev";
+# #             $buildConfiguration = "Release_Dev";
+# #             $buildType = "Dev" 
+# #         }
+# #       }
 
-#       echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
-#       echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
-#       echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
+# #       echo "##vso[task.setvariable variable=buildConfiguration;isOutput=true]$buildConfiguration"
+# #       echo "##vso[task.setvariable variable=fastlaneBuildCommand;isOutput=true]$fastlaneBuildCommand"
+# #       echo "##vso[task.setvariable variable=buildType;isOutput=true]$buildType"
 
-# - powershell: |
-#     Write-Host $(SetBuildVariables.buildType)
-#     Write-Host $(SetBuildVariables.buildConfiguration)
-#     Write-Host $(SetBuildVariables.fastlaneBuildCommand)
+# # - powershell: |
+# #     Write-Host $(SetBuildVariables.buildType)
+# #     Write-Host $(SetBuildVariables.buildConfiguration)
+# #     Write-Host $(SetBuildVariables.fastlaneBuildCommand)
 
-# - bash: |
-#     echo "$(Build.QueuedBy) - $(SetBuildVariables.buildType) - $(SetBuildVariables.buildConfiguration) - $(SetBuildVariables.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
+# # - bash: |
+# #     echo "$(Build.QueuedBy) - $(SetBuildVariables.buildType) - $(SetBuildVariables.buildConfiguration) - $(SetBuildVariables.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
 
-# - bash: echo $(MobileAppPackageUri)
+# # - bash: echo $(MobileAppPackageUri)
 
-# - task: CopyFiles@2
-#   inputs:
-#     SourceFolder: $(Build.Repository.LocalPath)
-#     contents: 'build.txt'
-#     targetFolder: $(Build.ArtifactStagingDirectory)    
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#     ArtifactName: 'build_artifact'
+# # - task: CopyFiles@2
+# #   inputs:
+# #     SourceFolder: $(Build.Repository.LocalPath)
+# #     contents: 'build.txt'
+# #     targetFolder: $(Build.ArtifactStagingDirectory)    
+# # - task: PublishBuildArtifacts@1
+# #   inputs:
+# #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+# #     ArtifactName: 'build_artifact'
