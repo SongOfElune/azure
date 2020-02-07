@@ -39,7 +39,7 @@ steps:
       scriptSource: inline
       script: |
         # buildNumber = "20200201.20"
-        date, counter = "$(Build.BuildNumber)".split(".")
+        date, counter = $(Build.BuildNumber).split(".")
         while len(counter) < 3: counter = "0" + counter
         appfaceBuildNumber = date + counter
         print(appfaceBuildNumber)
