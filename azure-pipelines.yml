@@ -11,7 +11,7 @@ variables:
   AdvancedBuildDir: $(BuildUserHomeDir)/n
   HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
   envName: dev
-  Version.MajorMinor: 1.0
+  Version.MajorMinor: 2020
   Version.Revision: $[counter(variables['Version.MajorMinor'], 0)
 
 pool:
