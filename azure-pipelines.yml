@@ -39,7 +39,7 @@ steps:
       targetType: inline
       script: |
         # $date = "20200204.21"
-        $date, $buildCounter = $(Build.BuildNumber).Split(".")
+        $date, $buildCounter = "$(Build.BuildNumber)".Split(".")
         while ($buildCounter.Length -lt 3) {$buildCounter = "0" + $buildCounter}
         $buildNumber = "$date" + "$buildCounter"
         ##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber
