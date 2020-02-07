@@ -18,6 +18,7 @@ pool:
   vmImage: 'macos-10.14'
 
 steps:
+  - script: echo $(Version.Revision)
   - powershell: env
   - powershell: |
       $buildMessage = (git log -1 --pretty=%B).Split()
