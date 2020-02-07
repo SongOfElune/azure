@@ -38,12 +38,11 @@ steps:
     inputs:
       scriptSource: inline
       script: |
-        # buildNumber = "20200201.20"
-        date, counter = $(Build.BuildNumber).split(".")
-        while len(counter) < 3: counter = "0" + counter
-        appfaceBuildNumber = date + counter
-        print(appfaceBuildNumber)
-        print(##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber)
+        $date = "20200204.21"
+        $date, $buildCounter = $date.Split(".")
+        while ($buildCounter.Length -lt 3) {$buildCounter = "0" + $buildCounter}
+        $buildNumber = "$date" + "$buildCounter"
+        ##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber
 
   - script: echo $(UpdateVersionNumber.buildNumber)
       
