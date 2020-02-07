@@ -42,7 +42,7 @@ steps:
         $date, $buildCounter = "$(Build.BuildNumber)".Split(".")
         while ($buildCounter.Length -lt 3) {$buildCounter = "0" + $buildCounter}
         $buildNumber = "$date" + "$buildCounter"
-        ##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber
+        echo "##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber"
 
   - script: echo "$(UpdateVersionNumber.buildNumber)"
       
