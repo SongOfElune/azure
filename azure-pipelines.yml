@@ -8,16 +8,23 @@ trigger: none
 pool:
   vmImage: 'windows-latest'
 
-steps:
-  - powershell: Write-Output "$(Build.SourceVersionMessage)"
+jobs:
+- job: Check
+  steps:
+    - powershell: | 
+        "$Build.SourceVersionMessage" -match [regex]::('\[\w+\][[:blank:]]\w+[[:blank:]]\(\d+.\d+.\d+\)')
   
-  - powershell: Write-Output "$(System.TeamFoundationCollectionUri)"
 
-  - powershell: Write-Output "$(System.TeamProject)"
+# steps:
+#   - powershell: Write-Output "$(Build.SourceVersionMessage)"
+  
+#   - powershell: Write-Output "$(System.TeamFoundationCollectionUri)"
 
-  - powershell: |
-      $targetUrl = "$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis"
-      Write-Output $targetUrl
+#   - powershell: Write-Output "$(System.TeamProject)"
+
+#   - powershell: |
+#       $targetUrl = "$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis"
+#       Write-Output $targetUrl
 # pr: none
 
 # variables:
