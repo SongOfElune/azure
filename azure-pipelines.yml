@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout: none
       - powershell: |
-          $weCanBuildIt = true
+          $weCanBuildIt = $true
           echo "##vso[task.setvariable variable=exist]$weCanBuildIt]"
         name: BuildPipeline
       - powershell: Write-Host "Hey!"
