@@ -11,7 +11,9 @@ pool:
 jobs:
 - job: Check
   steps:
+    - checkout: none
     - powershell: | 
+        Write-Output "$(Build.SourceVersionMessage)"
         "$(Build.SourceVersionMessage)" -match [regex]::('\[\w+\][[:blank:]]\w+[[:blank:]]\(\d+.\d+.\d+\)')
   
 
