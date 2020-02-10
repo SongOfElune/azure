@@ -12,7 +12,7 @@ jobs:
 - job: Check
   steps:
     - powershell: | 
-        "$Build.SourceVersionMessage" -match [regex]::('\[\w+\][[:blank:]]\w+[[:blank:]]\(\d+.\d+.\d+\)')
+        "$(Build.SourceVersionMessage)" -match [regex]::('\[\w+\][[:blank:]]\w+[[:blank:]]\(\d+.\d+.\d+\)')
   
 
 # steps:
