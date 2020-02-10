@@ -9,8 +9,11 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-  - powershell: |
-      Write-Output "$(Build.SourceVersionMessage)"
+  - powershell: Write-Output "$(Build.SourceVersionMessage)"
+  
+  - powershell: Write-Output "$(System.TeamFoundationCollectionUri)"
+
+  - powershell: Write-Output "$(System.TeamProject)"
 # pr: none
 
 # variables:
