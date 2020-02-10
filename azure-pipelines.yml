@@ -14,6 +14,10 @@ steps:
   - powershell: Write-Output "$(System.TeamFoundationCollectionUri)"
 
   - powershell: Write-Output "$(System.TeamProject)"
+
+  - powershell: |
+      $targetUrl = "$(System.TeamFoundationCollectionUri)/$(System.TeamProject)/_apis"
+      Write-Output $targetUrl
 # pr: none
 
 # variables:
