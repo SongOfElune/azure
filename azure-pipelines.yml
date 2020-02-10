@@ -8,8 +8,12 @@ trigger: none
 pool:
   vmImage: 'windows-latest'
 
+
+
 jobs:
+
 - job: Check
+  continueOnError: true
   steps:
     - checkout: none
     - powershell: | 
