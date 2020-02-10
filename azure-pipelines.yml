@@ -5,7 +5,8 @@
 
 trigger: none
 
-pool: 'windows-latest'
+pool:
+  vmImage: 'windows-latest'
 
 steps:
   - powershell: |
