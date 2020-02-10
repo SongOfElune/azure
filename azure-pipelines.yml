@@ -8,93 +8,89 @@ trigger: none
 pool:
   vmImage: 'windows-latest'
 
-
-
 jobs:
+  # - job: Check
+  #   steps:
+  #     - checkout: none
+  #     - powershell: if ("$(Build.SourceVersionMessage)" -match "\[\w+\] \w+ \(\d+.\d+.\d+\)") {exit 0} else {exit 1}
 
-- job: Check
-  continueOnError: true
-  steps:
-    - checkout: none
-    - powershell: | 
-        if ("$(Build.SourceVersionMessage)" -match "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
-          exit 0
-        } 
-        else {
-          exit 1
-        }
-- job: GoodOne
-  dependsOn: Check
-  condition: succeeded()
-  steps:
-    - checkout: none
-    - powershell: Write-Output ":)"
+  - job: Run
+    # dependsOn: Check
+    # condition: succeeded()
+    steps:
+      - checkout: none
+      - powershell: |
+          $weCanBuildIt = true
+          echo "##vso[task.setvariable variable=exist]$weCanBuildIt]
+        name: BuildPipeline
+      - powershell: Write-Host "Hey!"
+        condition: eq(variables['BuildPipeline.exist'], true)
 
-- job: BadOne
-  dependsOn: Check
-  condition: failed()
-  steps:
-    - checkout: none
-    - powershell: Write-Output ":("
+  # - job: BadOne
+  #   dependsOn: Check
+  #   condition: failed()
+  #   steps:
+  #     - checkout: none
+  #     - powershell: Write-Output ":("
 
-  
+    
 
-# steps:
-#   - powershell: Write-Output "$(Build.SourceVersionMessage)"
-  
-#   - powershell: Write-Output "$(System.TeamFoundationCollectionUri)"
+  # steps:
+  #   - powershell: Write-Output "$(Build.SourceVersionMessage)"
+    
+  #   - powershell: Write-Output "$(System.TeamFoundationCollectionUri)"
 
-#   - powershell: Write-Output "$(System.TeamProject)"
+  #   - powershell: Write-Output "$(System.TeamProject)"
 
-#   - powershell: |
-#       $targetUrl = "$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis"
-#       Write-Output $targetUrl
-# pr: none
+  #   - powershell: |
+  #       $targetUrl = "$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis"
+  #       Write-Output $targetUrl
+  # pr: none
 
-# variables:
-#   BuildUserHomeDir: /Users/runner
-#   AdvancedBuildDir: $(BuildUserHomeDir)/n
-#   HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
-#   envName: dev
-#   Version.MajorMinor: 2020
-#   a: $[counter(20, 000009)]
+  # variables:
+  #   BuildUserHomeDir: /Users/runner
+  #   AdvancedBuildDir: $(BuildUserHomeDir)/n
+  #   HelloWorldFilePath: $(AdvancedBuildDir)/hello.txt
+  #   envName: dev
+  #   Version.MajorMinor: 2020
+  #   a: $[counter(20, 000009)]
 
-# pool:
-#   vmImage: 'macos-10.14'
+  # pool:
+  #   vmImage: 'macos-10.14'
 
 
-# steps:
-#   - script: echo $()
-#   - powershell: env
-#   - powershell: |
-#       $buildMessage = (git log -1 --pretty=%B).Split()
-      
-#       Write-Output $buildMessage
-#       Write-Output $buildMessage.GetType()
+  # steps:
+  #   - script: echo $()
+  #   - powershell: env
+  #   - powershell: |
+  #       $buildMessage = (git log -1 --pretty=%B).Split()
+        
+  #       Write-Output $buildMessage
+  #       Write-Output $buildMessage.GetType()
 
-#       $buildType = $buildMessage[0]
-#       $buildService = $buildMessage[1]
-#       $buildVersion = $buildMessage[2].Trim('()')
+  #       $buildType = $buildMessage[0]
+  #       $buildService = $buildMessage[1]
+  #       $buildVersion = $buildMessage[2].Trim('()')
 
-#       Write-Output "Commit message - $buildMessage"
-#       Write-Output "Build type - $buildType"
-#       Write-Output "Build service - $buildService" 
-#       Write-Output "Build version - $buildVersion"
-  
+  #       Write-Output "Commit message - $buildMessage"
+  #       Write-Output "Build type - $buildType"
+  #       Write-Output "Build service - $buildService" 
+  #       Write-Output "Build version - $buildVersion"
+    
 
 
 
-# # - bash: |
-# #     echo "$(Build.QueuedBy) - $(SetBuildVariables.buildType) - $(SetBuildVariables.buildConfiguration) - $(SetBuildVariables.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
+  # # - bash: |
+  # #     echo "$(Build.QueuedBy) - $(SetBuildVariables.buildType) - $(SetBuildVariables.buildConfiguration) - $(SetBuildVariables.fastlaneBuildCommand)" >> $(Build.Repository.LocalPath)/build.txt
 
-# # - bash: echo $(MobileAppPackageUri)
+  # # - bash: echo $(MobileAppPackageUri)
 
-# # - task: CopyFiles@2
-# #   inputs:
-# #     SourceFolder: $(Build.Repository.LocalPath)
-# #     contents: 'build.txt'
-# #     targetFolder: $(Build.ArtifactStagingDirectory)    
-# # - task: PublishBuildArtifacts@1
-# #   inputs:
-# #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-# #     ArtifactName: 'build_artifact'
+  # # - task: CopyFiles@2
+  # #   inputs:
+  # #     SourceFolder: $(Build.Repository.LocalPath)
+  # #     contents: 'build.txt'
+  # #     targetFolder: $(Build.ArtifactStagingDirectory)    
+  # # - task: PublishBuildArtifacts@1
+  # #   inputs:
+  # #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  # #     ArtifactName: 'build_artifact'
