@@ -13,8 +13,26 @@ jobs:
   steps:
     - checkout: none
     - powershell: | 
-        Write-Output "$(Build.SourceVersionMessage)"
-        "$(Build.SourceVersionMessage)" -match "\[\w+\] \w+ \(\d+.\d+.\d+\)"
+        if ("$(Build.SourceVersionMessage)" -match "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
+          exit 0
+        } 
+        else {
+          exit 1
+        }
+- job: GoodOne
+  dependsOn: Check
+  condition: succeeded()
+  steps:
+    - checkout: none
+    - powershell: Write-Output ":)"
+
+- job: BadOne
+  dependsOn: Check
+  condition: failed()
+  steps:
+    - checkout: none
+    - powershell: Write-Output ":("
+
   
 
 # steps:
