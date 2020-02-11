@@ -26,16 +26,24 @@ jobs:
   - job: Run
     # dependsOn: Check
     # condition: succeeded()
+    continueOnError: true
     steps:
       - checkout: none
       - powershell: |
-          $a = "Release"
-          echo "##vso[task.setvariable variable=type;isOutput=true]$a"
-        name: SetType
+          exit 1
       - powershell: |
-          Write-Output "Hey!"
-        condition: and(succeeded(), eq(variables['SetType.type'], 'Release'))
-        name: BuildPipeline
+          Write-host "Hey!"
+        condition: failed()
+      # - powershell: |
+      #     $a = "Release"
+      #     echo "##vso[task.setvariable variable=type;isOutput=true]$a"
+      #   name: SetType
+      # - powershell: |
+      #     Write-Output "Hey!"
+      #   condition: and(succeeded(), eq(variables['SetType.type'], 'Release'))
+      #   name: BuildPipeline
+      # - powershell: |
+        
       # - powershell: Write-Host "##[warning] Hey!"
       # - powershell: Write-Host "##vso[task.logissue type=error;]This is colored red!"
 
