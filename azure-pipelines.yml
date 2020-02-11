@@ -15,7 +15,13 @@ jobs:
   # - job: Check
   #   steps:
   #     - checkout: none
-  #     - powershell: if ("$(Build.SourceVersionMessage)" -match "\[\w+\] \w+ \(\d+.\d+.\d+\)") {exit 0} else {exit 1}
+  #     - powershell: |
+  #         if ("$(Build.SourceVersionMessage)" -match "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
+  #           exit 0
+  #         }
+  #         else {
+  #           exit 1
+  #         }
 
   - job: Run
     # dependsOn: Check
@@ -23,12 +29,16 @@ jobs:
     steps:
       - checkout: none
       - powershell: |
-          $weCanBuildIt = $true
-          echo "##vso[task.setvariable variable=exist;isOutput=true]$weCanBuildIt]"
-
+          $a = "Release"
+          echo "##vso[task.setvariable variable=type;isOutput=true]$a]"
+        name: SetType
+      - powershell: |
+          Write-Output "Hey!"
+        condition: and(succeeded(), eq($(SetType.type), "Release"))
         name: BuildPipeline
-      - powershell: Write-Host "##[warning] Hey!"
-      - powershell: Write-Host "##vso[task.logissue type=error;]This is colored red!"
+      # - powershell: Write-Host "##[warning] Hey!"
+      # - powershell: Write-Host "##vso[task.logissue type=error;]This is colored red!"
+
 
 
   # - job: BadOne
