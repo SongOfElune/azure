@@ -34,7 +34,7 @@ jobs:
         name: SetType
       - powershell: |
           Write-Output "Hey!"
-        condition: and(succeeded(), eq("$(SetType.type)", "Release"))
+        condition: and(succeeded(), eq(variables['SetType.type'], "Release"))
         name: BuildPipeline
       # - powershell: Write-Host "##[warning] Hey!"
       # - powershell: Write-Host "##vso[task.logissue type=error;]This is colored red!"
