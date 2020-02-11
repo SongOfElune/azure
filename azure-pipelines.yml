@@ -33,7 +33,9 @@ jobs:
           exit 1
       - powershell: |
           Write-host "Hey!"
-        condition: failed()
+        condition: succeeded()
+      - powershell: |
+          Write-Host "Ney!"
       # - powershell: |
       #     $a = "Release"
       #     echo "##vso[task.setvariable variable=type;isOutput=true]$a"
