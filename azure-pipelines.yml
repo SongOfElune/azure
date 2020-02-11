@@ -30,7 +30,9 @@ jobs:
     steps:
       - checkout: none
       - powershell: |
-          Write-Error "EBANULOS" -ErrorAction SilentlyContinue
+          if ("$(Build.SourceVersionMessage)" -notmatch "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
+            Write-Error "Commit message doesn't meet the requirements."
+          }
       - powershell: |
           Write-host "Hey!"
         condition: succeeded()
