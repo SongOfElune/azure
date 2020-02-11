@@ -24,7 +24,7 @@ jobs:
           echo "##vso[task.setvariable variable=exist;isOutput=true]$weCanBuildIt]"
 
         name: BuildPipeline
-      - powershell: Write-Host "Hey!" -ForegroundColor Green 
+      - powershell: Write-Host "##[warning] Hey!"
 
 
   # - job: BadOne
