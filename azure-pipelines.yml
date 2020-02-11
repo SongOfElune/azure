@@ -24,7 +24,7 @@ jobs:
           echo "##vso[task.setvariable variable=exist;isOutput=true]$weCanBuildIt]"
         name: BuildPipeline
       - powershell: Write-Host "Hey!"
-        condition: eq(variables['BuildPipeline.exist'], true)
+        condition: eq(outputs['BuildPipeline.exist'], true)
 
   # - job: BadOne
   #   dependsOn: Check
