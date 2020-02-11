@@ -30,7 +30,7 @@ jobs:
       - checkout: none
       - powershell: |
           $a = "Release"
-          echo "##vso[task.setvariable variable=type;isOutput=true]$a]"
+          echo "##vso[task.setvariable variable=type;isOutput=true]$a"
         name: SetType
       - powershell: |
           Write-Output "Hey!"
