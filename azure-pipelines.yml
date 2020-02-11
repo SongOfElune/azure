@@ -28,6 +28,7 @@ jobs:
 
         name: BuildPipeline
       - powershell: Write-Host "##[warning] Hey!"
+      - powershell: Write-Host"##vso[task.logissue type=error;]This is colored red!"
 
 
   # - job: BadOne
