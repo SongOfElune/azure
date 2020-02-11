@@ -30,7 +30,7 @@ jobs:
     steps:
       - checkout: none
       - powershell: |
-          exit 1
+          Write-Error "EBANULOS" -ErrorAction SilentlyContinue
       - powershell: |
           Write-host "Hey!"
         condition: succeeded()
