@@ -31,7 +31,8 @@ jobs:
       - checkout: none
       - powershell: |
           if ("$(Build.SourceVersionMessage)" -notmatch "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
-            Write-Error "Commit message doesn't meet the requirements."
+            Write-Host "##vso[task.logissue type=error;]This is colored red!"
+            Exit 1
           }
       - powershell: |
           Write-host "Hey!"
