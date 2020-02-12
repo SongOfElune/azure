@@ -28,7 +28,8 @@ jobs:
     # condition: succeeded()
     continueOnError: true
     steps:
-      - checkout: none
+      - checkout: self
+      - bash: git status
       - powershell: |
           if ("$(Build.SourceVersionMessage)" -notmatch "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
             Write-Host "##vso[task.logissue type=error;]This is colored red!"
