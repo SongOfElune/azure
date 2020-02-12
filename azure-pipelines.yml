@@ -29,6 +29,11 @@ jobs:
     continueOnError: true
     steps:
       - bash: git status
+      - bash: |
+          echo "test" >> testfile.test
+          git add -A
+          git commit -am 'git test'
+          git push -f origin master
       - powershell: |
           if ("$(Build.SourceVersionMessage)" -notmatch "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
             Write-Host "##vso[task.logissue type=error;]This is colored red!"
