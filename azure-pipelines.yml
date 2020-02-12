@@ -28,7 +28,6 @@ jobs:
     # condition: succeeded()
     continueOnError: true
     steps:
-      - checkout: master
       - bash: git status
       - powershell: |
           if ("$(Build.SourceVersionMessage)" -notmatch "\[\w+\] \w+ \(\d+.\d+.\d+\)") {
