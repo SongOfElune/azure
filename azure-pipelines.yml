@@ -27,7 +27,9 @@ jobs:
   #         }
   - job: Firebase
     steps:
-      - bash: brew install firebase-cli
+      - bash: |
+          brew unlink node@6
+          brew install firebase-cli
 
   # - job: Run
   #   # dependsOn: Check
