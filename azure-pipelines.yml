@@ -19,6 +19,6 @@ jobs:
           }
       - powershell: 
           Write-Host "ohohost"
-        condition: eq(variables[test.protect], 1)
+        condition: eq(variables['test.protect'], 1)
         
 
