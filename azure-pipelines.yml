@@ -1,1 +1,22 @@
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: "macOS-10.14"
+
+jobs:
+  - job: Run
+    steps: 
+      - powershell: |
+          $protect = 1
+          echo "##vso[task.setvariable variable=protect;isOutput=true]$protect"
+        name: test
+      - powershell:
+          if ($(test.protect) -eq 1) {
+              write-host "OK"
+          }
+
+        
 
