@@ -10,13 +10,12 @@ jobs:
   - job: Run
     steps: 
       - powershell: |
-          $protect = 1
+          $protect = 0
           echo "##vso[task.setvariable variable=protect;isOutput=true]$protect"
         name: test
       - powershell:
-          if ($(test.protect) -eq 1) {
-              write-host "OK"
-          }
+          if ($(test.protect) -eq 1) {write-host "OK"}
+          else {write-host "NOT"}
       - powershell: 
           Write-Host "ohohost"
         condition: eq(variables['test.protect'], 1)
