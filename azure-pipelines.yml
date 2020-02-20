@@ -17,6 +17,8 @@ jobs:
           if ($(test.protect) -eq 1) {
               write-host "OK"
           }
-
+      - powershell: 
+          Write-Host "ohohost"
+        condition: eq(variables[test.protect], 1)
         
 
