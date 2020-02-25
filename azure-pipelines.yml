@@ -8,16 +8,14 @@ pool:
 
 jobs:
   - job: Run
-    steps: 
-      - powershell: |
-          $protect = 0
-          echo "##vso[task.setvariable variable=protect;isOutput=true]$protect"
-        name: test
-      - powershell:
-          if ($(test.protect) -eq 1) {write-host "OK"}
-          else {write-host "NOT"}
-      - powershell: 
-          Write-Host "ohohost"
-        condition: eq(variables['test.protect'], 1)
-        
-
+    steps:
+    - powershell: |
+        $date, $buildCounter = "$(Build.BuildNumber)".Split(".")
+        while ($buildCounter.Length -lt 2) {$buildCounter = "0" + $buildCounter}
+        $buildNumber = "$date" + "$buildCounter"
+        echo "##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber"
+      name: UpdateBuildNumber
+      displayName: Update Build Number
+    
+    - bash: 
+        bash echo $(UpdateBuildNumber.buildNumber)
