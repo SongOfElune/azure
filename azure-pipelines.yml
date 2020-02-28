@@ -12,6 +12,6 @@ variables:
 jobs:
   - job: Run
     steps:
-    - bash: brew install ruby@2.6.5
+    - bash: brew install ruby@2.6
     - bash: ruby --version
     
