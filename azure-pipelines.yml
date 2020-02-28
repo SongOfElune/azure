@@ -12,17 +12,5 @@ variables:
 jobs:
   - job: Run
     steps:
-    - powershell: |
-        $date, $buildCounter = "$(Build.BuildNumber)".Split(".")
-        while ($buildCounter.Length -lt 2) {$buildCounter = "0" + $buildCounter}
-        $buildNumber = "$date" + "$buildCounter"
-        echo "##vso[task.setvariable variable=buildNumber;isOutput=true]$buildNumber"
-      name: UpdateBuildNumber
-      displayName: Update Build Number
-
-    - bash: echo "This is true"
-      condition: eq(variables['boolVar'], true)
-    
-    - bash: echo "This is false"
-      condition: eq(variables['boolVar'], false)
+    - bash: gem list
     
