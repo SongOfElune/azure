@@ -17,4 +17,5 @@ jobs:
         versionSpec: '2.6.5'
         addToPath: true
     - bash: ruby --version
+    - bash: sudo gem install fastlane -NV
     - bash: fastlane custom_lane
