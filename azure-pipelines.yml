@@ -12,6 +12,9 @@ variables:
 jobs:
   - job: Run
     steps:
-    - bash: brew update && brew install ruby@2.6
+    - task: UseRubyVersion@0
+      inputs:
+        versionSpec: '2.6.5'
+        addToPath: true
     - bash: ruby --version
     
