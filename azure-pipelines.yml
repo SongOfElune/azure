@@ -14,5 +14,6 @@ jobs:
     steps:
     - bash: gem list
     - bash: sudo gem install faraday --version 0.15.4
+    - bash: sudo gem uninstall faraday 
     - bash: gem list
     
