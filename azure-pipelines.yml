@@ -12,8 +12,6 @@ variables:
 jobs:
   - job: Run
     steps:
-    - bash: gem list
-    - bash: sudo gem install faraday --version 0.15.4
-    - bash: sudo gem uninstall faraday 
-    - bash: gem list
+    - bash: brew install ruby@2.6.5
+    - bash: ruby --version
     
