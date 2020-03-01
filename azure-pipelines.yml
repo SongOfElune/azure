@@ -11,6 +11,7 @@ variables:
 
 jobs:
   - job: Run
+    condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
     steps:
     - task: UseRubyVersion@0
       inputs:
