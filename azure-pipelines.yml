@@ -13,10 +13,4 @@ jobs:
   - job: Run
     condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
     steps:
-    - task: UseRubyVersion@0
-      inputs:
-        versionSpec: '2.6.5'
-        addToPath: true
-    - bash: ruby --version
-    - bash: sudo gem install fastlane -NV
-    - bash: fastlane custom_lane
+      - bash: brew isntall firebase-cli
