@@ -28,6 +28,6 @@ jobs:
     steps:
       - bash: echo "##vso[task.setvariable variable=useDexProtector]$(dexProtector)"
       - powershell: if ($useDexProtector) {echo 1}
-      - template: template.yml
-        parameters:
-          yesNo: $useDexProtector
+      # - template: template.yml
+      #   parameters:
+      #     yesNo: $useDexProtector
