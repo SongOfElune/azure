@@ -1,4 +1,4 @@
-# Starter pipeline
+Starter pipeline
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -61,7 +61,7 @@ jobs:
       #   condition: and(succeeded(), eq(variables['SetType.type'], 'Release'))
       #   name: BuildPipeline
       # - powershell: |
-        
+
       # - powershell: Write-Host "##[warning] Hey!"
       # - powershell: Write-Host "##vso[task.logissue type=error;]This is colored red!"
 
@@ -74,11 +74,11 @@ jobs:
   #     - checkout: none
   #     - powershell: Write-Output ":("
 
-    
+
 
   # steps:
   #   - powershell: Write-Output "$(Build.SourceVersionMessage)"
-    
+
   #   - powershell: Write-Output "$(System.TeamFoundationCollectionUri)"
 
   #   - powershell: Write-Output "$(System.TeamProject)"
@@ -105,7 +105,7 @@ jobs:
   #   - powershell: env
   #   - powershell: |
   #       $buildMessage = (git log -1 --pretty=%B).Split()
-        
+
   #       Write-Output $buildMessage
   #       Write-Output $buildMessage.GetType()
 
@@ -115,9 +115,9 @@ jobs:
 
   #       Write-Output "Commit message - $buildMessage"
   #       Write-Output "Build type - $buildType"
-  #       Write-Output "Build service - $buildService" 
+  #       Write-Output "Build service - $buildService"
   #       Write-Output "Build version - $buildVersion"
-    
+
 
 
 
@@ -130,7 +130,7 @@ jobs:
   # #   inputs:
   # #     SourceFolder: $(Build.Repository.LocalPath)
   # #     contents: 'build.txt'
-  # #     targetFolder: $(Build.ArtifactStagingDirectory)    
+  # #     targetFolder: $(Build.ArtifactStagingDirectory)
   # # - task: PublishBuildArtifacts@1
   # #   inputs:
   # #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'

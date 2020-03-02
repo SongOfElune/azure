@@ -26,6 +26,7 @@ jobs:
           dexProtector: true
           sslPinning: false
     steps:
-      - template: template.yml
-        parameters:
-          yesNo: ${{ variables.dexProtector }}
+      - bash: echo ${{ variables }}
+      # - template: template.yml
+      #   parameters:
+      #     yesNo: ${{ variables.dexProtector }}
