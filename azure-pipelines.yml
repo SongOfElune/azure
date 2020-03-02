@@ -17,3 +17,7 @@ jobs:
         condition: eq(variables.boolVar, true)
       - bash: echo "Bad"
         condition: eq(variables.boolVar, false)
+      - bash: echo "WTF"
+        condition: eq(variables.boolVar, 'true')
+      - bash: echo "WTF2"
+        condition: eq(variables.boolVar, 'false')
