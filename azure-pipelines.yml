@@ -15,4 +15,4 @@ jobs:
     steps:
       - template: template.yml
         parameters:
-          yesNo: $[variables.boolVar]
+          yesNo: $(variables['boolVar'])
