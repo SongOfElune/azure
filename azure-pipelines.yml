@@ -7,7 +7,7 @@ pool:
   vmImage: "macOS-10.14"
 
 variables:
-  boolVar: "hui"
+  boolVar: true
 
 jobs:
   - job: Run
