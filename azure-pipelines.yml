@@ -26,6 +26,7 @@ jobs:
           dexProtector: False
           sslPinning: False
     steps:
+      - bash: echo "##vso[task.setvariable variable=fknmtrx;isOutput=true]$env"
       - template: template.yml
         parameters:
-          yesNo: "$(env)"
+          yesNo: $(fknmtrx)
