@@ -28,4 +28,4 @@ jobs:
     steps:
       - template: template.yml
         parameters:
-          yesNo: ${{ variables.dexProtector }}
+          yesNo: ${{ strategy.matrix.dexProtector }}
