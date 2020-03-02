@@ -15,3 +15,5 @@ jobs:
     steps:
       - bash: echo "Good"
         condition: eq(variables.boolVar, true)
+      - bash: echo "Bad"
+        condition: eq(variables.boolVar, false)
