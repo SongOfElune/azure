@@ -32,4 +32,4 @@ jobs:
 
       - template: template.yml
         parameters:
-          yesNo: ${{ SetVar.useDexProtector }}
+          yesNo: ${{ variables.SetVar.useDexProtector }}
