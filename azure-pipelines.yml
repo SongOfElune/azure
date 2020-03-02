@@ -12,21 +12,22 @@ variables:
 jobs:
   - job: Run
     condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
-    strategy:
-      maxParallel: 3
-      matrix:
-        dev:
-          env: dev
-          buildType: Release
-          dexProtector: true
-          sslPinning: false
-        stg:
-          env: stg
-          buildType: Release
-          dexProtector: true
-          sslPinning: false
+    # strategy:
+    #   maxParallel: 3
+    #   matrix:
+    #     dev:
+    #       env: dev
+    #       buildType: Release
+    #       dexProtector: true
+    #       sslPinning: false
+    #     stg:
+    #       env: stg
+    #       buildType: Release
+    #       dexProtector: true
+    #       sslPinning: false
+    variables:
+      dexProtector: true
     steps:
-      - powershell: printenv
-      # - template: template.yml
-      #   parameters:
-      #     yesNo: ${{ variables.dexProtector }}
+      - template: template.yml
+        parameters:
+          yesNo: ${{ variables.dexProtector }}
