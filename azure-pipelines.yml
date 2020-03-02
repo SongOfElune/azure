@@ -30,4 +30,4 @@ jobs:
       - powershell: if ($useDexProtector) {echo 1}
       - template: template.yml
         parameters:
-          yesNo: $(variables.useDexProtector)
+          yesNo: $useDexProtector
