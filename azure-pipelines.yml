@@ -12,7 +12,20 @@ variables:
 jobs:
   - job: Run
     condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
+    strategy:
+      maxParallel: 3
+      matrix:
+        dev:
+          env: dev
+          buildType: Release
+          dexProtector: true
+          sslPinning: false
+        stg:
+          env: stg
+          buildType: Release
+          dexProtector: true
+          sslPinning: false
     steps:
       - template: template.yml
         parameters:
-          yesNo: ${{ variables.boolVar }}
+          yesNo: ${{ variables.dexProtector }}
