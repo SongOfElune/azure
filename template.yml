@@ -6,7 +6,7 @@ steps:
   - checkout: none
 
   - bash: echo "Good"
-    condition: eq(${{ parameters.yesNo }}, 'dev')
+    condition: eq('${{ parameters.yesNo }}', 'dev')
 
   - bash: echo "Bad"
-    condition: eq(${{ parameters.yesNo }}, 'stg')
+    condition: eq('${{ parameters.yesNo }}', 'stg')
