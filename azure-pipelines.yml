@@ -18,13 +18,13 @@ jobs:
         dev:
           env: dev
           buildType: Release
-          dexProtector: true
-          sslPinning: false
+          dexProtector: True
+          sslPinning: False
         stg:
           env: stg
           buildType: Release
-          dexProtector: false
-          sslPinning: false
+          dexProtector: False
+          sslPinning: False
     steps:
       - template: template.yml
         parameters:
