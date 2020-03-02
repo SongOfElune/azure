@@ -26,7 +26,7 @@ jobs:
     #       dexProtector: true
     #       sslPinning: false
     variables:
-      dexProtector: true
+      dexProtector: false
     steps:
       - template: template.yml
         parameters:
