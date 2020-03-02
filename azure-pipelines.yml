@@ -18,16 +18,14 @@ jobs:
         dev:
           env: dev
           buildType: Release
-          dexProtector_m: true
+          dexProtector: true
           sslPinning: false
         stg:
           env: stg
           buildType: Release
-          dexProtector_m: true
+          dexProtector: true
           sslPinning: false
-    variables:
-      dexProtector: $(dexProtector_m)
     steps:
       - template: template.yml
         parameters:
-          yesNo: ${{ variables.dexProtector }}
+          yesNo: ${{ dexProtector }}
