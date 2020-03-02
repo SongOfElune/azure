@@ -1,0 +1,10 @@
+parameters:
+  - name: yesNo
+    type: boolean
+
+steps:
+  - bash: echo "Good"
+    condition: eq(parameters.yesNo, true)
+
+  - bash: echo "Bad"
+    condition: eq(parameters.yesNo, false)
