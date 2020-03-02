@@ -26,7 +26,7 @@ jobs:
           dexProtector: true
           sslPinning: false
     steps:
-      - powershell: Write-Host ${{ variables }}
+      - powershell: Write-Host $[variables]
       # - template: template.yml
       #   parameters:
       #     yesNo: ${{ variables.dexProtector }}
