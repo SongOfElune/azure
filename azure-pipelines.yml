@@ -28,4 +28,4 @@ jobs:
     steps:
       - template: template.yml
         parameters:
-          yesNo: $(env)
+          yesNo: "$(env)"
