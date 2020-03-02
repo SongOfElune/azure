@@ -23,9 +23,9 @@ jobs:
         stg:
           env: stg
           buildType: Release
-          dexProtector: true
+          dexProtector: false
           sslPinning: false
     steps:
       - template: template.yml
         parameters:
-          yesNo: ${{ dexProtector }}
+          yesNo: $(dexProtector)
