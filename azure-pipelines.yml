@@ -12,24 +12,24 @@ variables:
 jobs:
   - job: Run
     condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
-    # strategy:
-    #   maxParallel: 3
-    #   matrix:
-    #     dev:
-    #       env: dev
-    #       buildType: Release
-    #       dexProtector: True
-    #       sslPinning: False
-    #     stg:
-    #       env: stg
-    #       buildType: Release
-    #       dexProtector: False
-    #       sslPinning: False
-    variables:
-      blya: 'dev'
+    strategy:
+      maxParallel: 3
+      matrix:
+        dev:
+          env: dev
+          buildType: Release
+          dexProtector: True
+          sslPinning: False
+        stg:
+          env: stg
+          buildType: Release
+          dexProtector: False
+          sslPinning: False
+    # variables:
+    #   blya: 'dev'
     steps:
       # - bash: echo "##vso[task.setvariable variable=fknmtrx;isOutput=true]$env"
       # - bash: echo $fknmtrx
       - template: template.yml
         parameters:
-          yesNo: ${{ variables.blya }}
+          yesNo: ${{ variables.env }}
