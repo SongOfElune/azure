@@ -15,4 +15,4 @@ jobs:
     steps:
       - template: template.yml
         parameters:
-          yesNo: true
+          yesNo: variables.boolVar

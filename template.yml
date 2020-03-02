@@ -3,6 +3,8 @@ parameters:
     type: boolean
 
 steps:
+  - checkout: none
+  
   - bash: echo "Good"
     condition: eq(${{ parameters.yesNo }}, true)
 
