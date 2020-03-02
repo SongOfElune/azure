@@ -26,10 +26,6 @@ jobs:
           dexProtector: False
           sslPinning: False
     steps:
-      - bash: echo "##vso[task.setvariable variable=useDexProtector;isOutput=true]$(dexProtector)"
-        name: SetVar
-
-
       - template: template.yml
         parameters:
-          yesNo: ${{ variables.SetVar.useDexProtector }}
+          yesNo: $[variables.dexProtector]
