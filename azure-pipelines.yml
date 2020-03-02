@@ -28,8 +28,8 @@ jobs:
     variables:
       blya: 'dev'
     steps:
-      - bash: echo "##vso[task.setvariable variable=fknmtrx;isOutput=true]$env"
-      - bash: echo $fknmtrx
+      # - bash: echo "##vso[task.setvariable variable=fknmtrx;isOutput=true]$env"
+      # - bash: echo $fknmtrx
       - template: template.yml
         parameters:
-          yesNo: $(blya)
+          yesNo: ${{ variables.blya }}
