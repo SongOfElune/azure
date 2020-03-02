@@ -4,7 +4,7 @@ parameters:
 
 steps:
   - bash: echo "Good"
-    condition: eq(parameters.yesNo, true)
+    condition: eq(${{ parameters.yesNo }}, true)
 
   - bash: echo "Bad"
-    condition: eq(parameters.yesNo, false)
+    condition: eq(${{ parameters.yesNo }}, false)
