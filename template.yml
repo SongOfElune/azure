@@ -1,12 +1,12 @@
 parameters:
   - name: yesNo
-    type: boolean
+    type: string
 
 steps:
   - checkout: none
-  
+
   - bash: echo "Good"
-    condition: eq(${{ parameters.yesNo }}, true)
+    condition: eq(${{ parameters.yesNo }}, 'dev')
 
   - bash: echo "Bad"
-    condition: eq(${{ parameters.yesNo }}, false)
+    condition: eq(${{ parameters.yesNo }}, 'stg')
