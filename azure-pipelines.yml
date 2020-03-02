@@ -28,4 +28,4 @@ jobs:
     steps:
       - template: template.yml
         parameters:
-          yesNo: ${{ dexProtector }}
+          yesNo: ${{ variables['dexProtector'] }}
