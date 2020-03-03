@@ -17,19 +17,12 @@ jobs:
       matrix:
         dev:
           env: dev
-          buildType: Release
-          dexProtector: True
-          sslPinning: False
         stg:
           env: stg
-          buildType: Release
-          dexProtector: False
-          sslPinning: False
-    # variables:
-    #   blya: 'dev'
+        uat:
+          env: uat
+    variables:
+      env: 'dev'
     steps:
-      # - bash: echo "##vso[task.setvariable variable=fknmtrx;isOutput=true]$env"
-      # - bash: echo $fknmtrx
-      - template: template.yml
-        parameters:
-          yesNo: ${{ variables.env }}
+      - bash: echo "Good"
+        condition: nin(variables['env'], 'dev', 'uat')
