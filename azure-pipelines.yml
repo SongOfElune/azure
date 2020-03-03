@@ -24,5 +24,6 @@ jobs:
     variables:
       env: 'dev'
     steps:
+      - checkout: none
       - bash: echo "Good"
-        condition: nin(variables['env'], 'dev', 'uat')
+        condition: notIn(variables['env'], 'dev', 'uat')
