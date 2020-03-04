@@ -20,6 +20,8 @@ jobs:
         inputs:
           type: 'Build'
           tags: '123'
+
+      - powershell: Write-Host "##vso[build.addbuildtag]Automatd"
       - bash: echo "stg"
         displayName: not in dev, uat
         condition: notIn(variables['env'], 'dev', 'uat')
