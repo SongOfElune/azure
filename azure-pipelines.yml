@@ -18,7 +18,7 @@ jobs:
       - checkout: none
       - task: colinsalmcorner.colinsalmcorner-buildtasksbeta.tag-build-task.tagBuildOrRelease@0
         displayName: 'Tag Build'
-        type: Build  # Build or Release - specify which artifact to tag (default is Build)
+        type: Build
         inputs:
           tags: |
             tag1
