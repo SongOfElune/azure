@@ -16,13 +16,10 @@ jobs:
       env: 'dev'
     steps:
       - checkout: none
-      - task: colinsalmcorner.colinsalmcorner-buildtasksbeta.tag-build-task.tagBuildOrRelease@0
-        displayName: 'Tag Build'
-        type: Build
+      - task: tagBuildOrRelease@0
         inputs:
-          tags: |
-            tag1
-            tag2
+          type: 'Build'
+          tags: '123'
       - bash: echo "stg"
         displayName: not in dev, uat
         condition: notIn(variables['env'], 'dev', 'uat')
