@@ -12,22 +12,17 @@ variables:
 jobs:
   - job: Run
     condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
-    strategy:
-      maxParallel: 3
-      matrix:
-        dev:
-          env: dev
-          release: true
-        stg:
-          env: stg
-          release: true
-        uat:
-          env: uat
-          release: false
     variables:
       env: 'dev'
     steps:
       - checkout: none
+      - task: colinsalmcorner.colinsalmcorner-buildtasksbeta.tag-build-task.tagBuildOrRelease@0
+        displayName: 'Tag Build'
+        type: Build  # Build or Release - specify which artifact to tag (default is Build)
+        inputs:
+          tags: |
+            tag1
+            tag2
       - bash: echo "stg"
         displayName: not in dev, uat
         condition: notIn(variables['env'], 'dev', 'uat')
