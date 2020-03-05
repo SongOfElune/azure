@@ -16,21 +16,4 @@ jobs:
       env: 'dev'
     steps:
       - checkout: none
-      - task: tagBuildOrRelease@0
-        inputs:
-          type: 'Build'
-          tags: '123'
-
-      - powershell: Write-Host "##vso[build.addbuildtag]Automatd"
-      - bash: echo "stg"
-        displayName: not in dev, uat
-        condition: notIn(variables['env'], 'dev', 'uat')
-      - bash: echo "dev/uat"
-        displayName: in dev, uat
-        condition: in(variables['env'], 'dev', 'uat')
-      - bash: echo "Release"
-        displayName: release true
-        condition: eq(variables['release'], true)
-      - bash: echo "Not release"
-        displayName: release false
-        condition: ne(variables['release'], false)
+      - bash: gem query --local
