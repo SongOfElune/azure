@@ -16,4 +16,11 @@ jobs:
       env: 'dev'
     steps:
       - checkout: none
-      - bash: gem query --local
+      - task: UseRubyVersion@0
+        displayName: Set default ruby version to 2.6.5
+        inputs:
+          versionSpec: '2.6.5'
+          addToPath: true
+      
+      - bash: ruby -v
+      - bash: fastlane env
