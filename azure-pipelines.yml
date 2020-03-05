@@ -4,7 +4,7 @@ trigger:
       - master
 
 pool:
-  vmImage: "macOS-10.14"
+  vmImage: "macOS-10.15"
 
 variables:
   boolVar: true
