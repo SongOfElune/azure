@@ -15,12 +15,6 @@ jobs:
     variables:
       env: 'dev'
     steps:
-      - checkout: none
-      - task: UseRubyVersion@0
-        displayName: Set default ruby version to 2.6.5
-        inputs:
-          versionSpec: '2.6.5'
-          addToPath: true
-      
+      - checkout: none      
       - bash: ruby -v
       - bash: fastlane env
