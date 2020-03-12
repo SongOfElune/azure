@@ -20,3 +20,4 @@ jobs:
       - bash: fastlane env
       - bash: echo "test"
       - bash: echo "test2"
+      - bash: echo "test3"
