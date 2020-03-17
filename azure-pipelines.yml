@@ -16,8 +16,4 @@ jobs:
       env: 'dev'
     steps:
       - checkout: none
-      - bash: ruby -v
-      - bash: fastlane env
-      - bash: echo "test"
-      - bash: echo "test2"
-      - bash: echo "test3"
+      - bash: pod --version
