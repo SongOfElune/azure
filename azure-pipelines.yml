@@ -1,7 +1,10 @@
-trigger:
+schedules:
+- cron: "*/5 * * * * "
+  displayName: Run every 5 minutes
   branches:
     include:
       - master
+  always: true
 
 pool:
   vmImage: "macOS-10.15"
@@ -16,4 +19,4 @@ jobs:
       env: 'dev'
     steps:
       - checkout: none
-      - bash: pod --version
+      - bash: echo $(testBranch)
