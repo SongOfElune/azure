@@ -14,7 +14,7 @@ variables:
 
 jobs:
   - job: Run
-    condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
+    condition: in(variables['Build.Reason'], 'Schedule', IndividualCI', 'Manual')
     variables:
       env: 'dev'
     steps:
