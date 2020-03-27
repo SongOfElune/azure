@@ -1,10 +1,13 @@
-schedules:
-- cron: "*/5 * * * * "
-  displayName: Run every 5 minutes
-  branches:
-    include:
-      - master
-  always: true
+# schedules:
+# - cron: "*/5 * * * * "
+#   displayName: Run every 5 minutes
+#   branches:
+#     include:
+#       - master
+#   always: true
+
+trigger: none
+pr: none
 
 pool:
   vmImage: "macOS-10.15"
