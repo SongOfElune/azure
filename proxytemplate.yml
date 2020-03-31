@@ -1,7 +1,3 @@
-parameters:
-- name: project
-  type: string
-
 steps:
   - powershell: echo "this is proxy template"
   # - powershell: echo '${{ parameters.project }}'
@@ -9,4 +5,3 @@ steps:
     - template: pdtemplate.yml
   - ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
     - template: platemplate.yml
- 
