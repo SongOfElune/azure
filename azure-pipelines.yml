@@ -22,6 +22,8 @@ jobs:
       env: 'dev'
     steps:
       - template: template.yml
+        parameters:
+          yesNo: true
       # - powershell: echo "this is master"
       #   condition: eq(variables['Build.SourceBranch'], 'master')
       # - checkout: none
