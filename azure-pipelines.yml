@@ -17,13 +17,14 @@ variables:
 
 jobs:
   - job: Run
-    condition: in(variables['Build.Reason'], 'Schedule', 'IndividualCI', 'Manual')
-    variables:
-      env: 'dev'
+    # condition: in(variables['Build.Reason'], 'Schedule', 'IndividualCI', 'Manual')
+    # variables:
+    #   env: 'dev'
     steps:
-      - template: template.yml
-        parameters:
-          yesNo: true
+      - bash: echo "$(Build.DefinitionName)"
+      # - template: template.yml
+      #   parameters:
+      #     yesNo: true
       # - powershell: echo "this is master"
       #   condition: eq(variables['Build.SourceBranch'], 'master')
       # - checkout: none
