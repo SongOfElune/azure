@@ -21,16 +21,14 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-    - ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
-      - template: pdtemplate.yml
-    - ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
-      - template: platemplate.yml
+      - bash: echo "Main"
+      - template: proxytemplate.yml
       # - template: proxytemplate.yml
       #   parameters:
       #   ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
       #     project: 'PD'
       #   ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
-          
+
       # - ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
       #   - powershell: echo "if PD"
       #   - template: pdtemplate.yml

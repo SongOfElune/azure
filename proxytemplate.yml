@@ -5,9 +5,8 @@ parameters:
 steps:
   - powershell: echo "this is proxy template"
   # - powershell: echo '${{ parameters.project }}'
-  - ${{ if eq('${{ parameters.project }}', 'PD') }}:
-    - powershell: echo "if PD"
+  - ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
     - template: pdtemplate.yml
-  - ${{ if eq('${{ parameters.project }}', 'PLA') }}:
-    - powershell: echo "if PLA"
+  - ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
     - template: platemplate.yml
+ 
