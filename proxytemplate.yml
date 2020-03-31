@@ -4,7 +4,7 @@ parameters:
 
 steps:
   - powershell: echo "this is proxy template"
-  - ${{ if eq(${{ parameters.project }}, 'PD') }}:
+  - ${{ if eq('${{ parameters.project }}', 'PD') }}:
     - template: pdtemplate.yml
-  - ${{ if eq(${{ parameters.project }}, 'PLA') }}:
+  - ${{ if eq('${{ parameters.project }}', 'PLA') }}:
     - template: platemplate.yml
