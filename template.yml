@@ -4,9 +4,24 @@ parameters:
 
 steps:
   - checkout: none
-
-  - bash: echo "Good"
-    condition: eq('${{ parameters.yesNo }}', 'dev')
-
-  - bash: echo "Bad"
-    condition: eq('${{ parameters.yesNo }}', 'stg')
+  
+  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+  
+    - bash: echo "if true, step 1"
+      displayName: first bash step
+      
+    - bash: echo "if true, step 2"
+      displayName: second bash step
+      
+  - bash: echo "common bash"
+  
+  - ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+    
+    - bash: echo "if false, step 1"
+      displayName: fourth bash step
+      
+    - bash: echo "if false, setp 2"
+      displayName: fifth bash step
+      
+  - bash: echo "second common bash"
+  
