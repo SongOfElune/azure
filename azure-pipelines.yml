@@ -21,14 +21,22 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - checkout: none
-      - powershell: echo "hey"
-      - ${{ if eq(variables['prefix'], 'PD') }}:
-        - powershell: echo "if PD"
-        - template: pdtemplate.yml
-      - ${{ if eq(variables['prefix'], 'PLA') }}:
-        - powershell: echo "if PLA"
-        - template: platemplate.yml
+    - ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
+      - template: pdtemplate.yml
+    - ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
+      - template: platemplate.yml
+      # - template: proxytemplate.yml
+      #   parameters:
+      #   ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
+      #     project: 'PD'
+      #   ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
+          
+      # - ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
+      #   - powershell: echo "if PD"
+      #   - template: pdtemplate.yml
+      # - ${{ if eq(variables['prefix'], 'PLA') }}:
+      #   - powershell: echo "if PLA"
+      #   - template: platemplate.yml
 
       # - powershell: |
       #     $prefix = "$(Build.DefinitionName)".Split(".")[0]
