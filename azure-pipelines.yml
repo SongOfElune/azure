@@ -28,7 +28,7 @@ jobs:
       #   name: GetProject
 
       # - powershell: echo "$(GetProject.prefix)"
-      - bash: echo "$(prefix)"
+      # - bash: echo "$(prefix)"
       # - template: "${{ variables.prefix }}template.yml"
 
       - template: proxytemplate.yml
