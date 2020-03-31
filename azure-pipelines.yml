@@ -29,11 +29,11 @@ jobs:
 
       # - powershell: echo "$(GetProject.prefix)"
       - bash: echo "$(prefix)"
-      - template: "${{ variables.prefix }}template.yml"
+      # - template: "${{ variables.prefix }}template.yml"
 
-      # - template: proxytemplate.yml
-      #   parameters:
-      #     project: $(GetProject.prefix)
+      - template: proxytemplate.yml
+        parameters:
+          project: $(prefix)
 
       # - bash: echo "$(Build.DefinitionName)"
       # - bash: echo "$(Build.BuildUri)"
