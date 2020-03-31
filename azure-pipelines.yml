@@ -21,9 +21,16 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: echo "$(Build.DefinitionName)"
-      - bash: echo "$(Build.BuildUri)"
-      - bash: env
+      - checkout: none
+      - powershell: |
+          $project = "$(Build.DefinitionName)".Split(".")[0]
+          echo "##vso[task.setvariable variable=prefix]$project"
+        name: GetProject
+      - powershell: echo "$(GetProject.prefix)"
+      - template: $(GetProject.prefix)template.yml
+      # - bash: echo "$(Build.DefinitionName)"
+      # - bash: echo "$(Build.BuildUri)"
+      # - bash: env
       # - template: template.yml
       #   parameters:
       #     yesNo: true
