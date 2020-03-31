@@ -22,6 +22,8 @@ jobs:
     #   env: 'dev'
     steps:
       - bash: echo "$(Build.DefinitionName)"
+      - bash: echo "$(Build.BuildUri)"
+      - bash: env
       # - template: template.yml
       #   parameters:
       #     yesNo: true
