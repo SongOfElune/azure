@@ -1,6 +1,7 @@
 parameters:
-  - name: project
-    type: string
+- name: project
+  type: string
+
 steps:
   - powershell: echo "this is proxy template"
   - ${{ if eq(${{ parameters.project }}, 'PD') }}:
