@@ -14,6 +14,7 @@ pool:
 
 variables:
   boolVar: true
+  prefix: pd
 
 jobs:
   - job: Run
