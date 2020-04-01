@@ -22,8 +22,9 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
+      - bash: $[variables.pipeline]
       - bash: echo "Main"
-      - template: ${{ variables.prefix }}template.yml
+      # - template: ${{ variables.prefix }}template.yml
       # - template: proxytemplate.yml
       #   parameters:
       #   ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
