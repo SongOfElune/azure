@@ -1,9 +1,9 @@
 variables:
   - ${{ if startsWith(variables['Build.DefinitionName'], 'CVP') }}:
-    prefix: cvp
+      prefix: cvp
   - ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
-    prefix: pla
+      prefix: pla
   - ${{ if startsWith(variables['Build.DefinitionName'], 'VST') }}:
-    prefix: vst
+      prefix: vst
   - ${{ if startsWith(variables['Build.DefinitionName'], 'ZCC') }}:
-    prefix: zcc
+      prefix: zcc
