@@ -13,8 +13,7 @@ pool:
   vmImage: "macOS-10.15"
 
 variables:
-  boolVar: true
-  prefix: pd
+  - template: variables.yml
 
 jobs:
   - job: Run
@@ -22,12 +21,8 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: echo $[variables]
-      - bash: $[variables]
-      - bash: echo $[pipeline]
-      - bash: $[pipeline]
-      - bash: echo "Main"
-      # - template: ${{ variables.prefix }}template.yml
+      - bash: echo $[variables.prefix]
+      - template: ${{ variables.prefix }}template.yml
       # - template: proxytemplate.yml
       #   parameters:
       #   ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
