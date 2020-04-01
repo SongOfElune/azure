@@ -22,8 +22,10 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: echo $[variabels]
-      - bash: echo $[variables.pipeline]
+      - bash: echo $[variables]
+      - bash: $[variables]
+      - bash: echo $[pipeline]
+      - bash: $[pipeline]
       - bash: echo "Main"
       # - template: ${{ variables.prefix }}template.yml
       # - template: proxytemplate.yml
