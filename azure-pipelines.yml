@@ -22,7 +22,7 @@ jobs:
     #   env: 'dev'
     steps:
       - bash: echo "Main"
-      - template: proxytemplate.yml
+      - template: ${{ variables.prefix }}template.yml
       # - template: proxytemplate.yml
       #   parameters:
       #   ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
