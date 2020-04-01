@@ -21,7 +21,7 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: echo $[variables.prefix]
+      - bash: echo "$(prefix)"
       - template: ${{ variables.prefix }}template.yml
       # - template: proxytemplate.yml
       #   parameters:
