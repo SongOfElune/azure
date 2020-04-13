@@ -8,4 +8,4 @@ parameters:
 
 steps:
   - powershell: echo "this is pla template"
-  - bash: echo "${{ parameters.testParam }}"
+  - bash: echo "${{ parameters.testParam.veracodeBranches }}"
