@@ -16,7 +16,7 @@ variables:
   - template: variables.yml
   - group: my-vars-group
   - name: testvar
-    value: [branch0, branch1]
+    value: "branch0, refs/heads/master, branch1"
 
 jobs:
   - job: Run
@@ -26,7 +26,7 @@ jobs:
     steps:
       - bash: echo "$(prefix)"
       - bash: echo "good"
-        condition: in(variables['Build.SourceBranch'], join(',', variables['testvar']))
+        condition: contains(variables['testvar'], variables['Build.SourceBranch'])
       # - bash: echo "i am $(iam)"
       # - template: ${{ variables.prefix }}template.yml
       # - bash: echo "we are $(iam)"
