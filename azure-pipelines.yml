@@ -16,7 +16,8 @@ variables:
   - template: variables.yml
   - group: my-vars-group
   - name: testvar
-    value: "branch0, refs/heads/master, branch1"
+    value: "branch0, branch1"
+    # value: "branch0, refs/heads/master, branch1"
 
 jobs:
   - job: Run
