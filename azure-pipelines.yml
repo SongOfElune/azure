@@ -27,7 +27,7 @@ jobs:
     steps:
       - bash: echo "$(prefix)"
       - bash: echo "good"
-        condition: in(variables['Build.SourceBranch'],join(variables['testvar']))
+        condition: in(variables['Build.SourceBranch'],join(',',variables['testvar']))
       # - bash: echo "i am $(iam)"
       # - template: ${{ variables.prefix }}template.yml
       # - bash: echo "we are $(iam)"
