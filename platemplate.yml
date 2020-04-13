@@ -2,10 +2,11 @@ parameters:
   name: testParam
   type: object
   default:
-    - branch0
-    - branch1
+    branches:
+      - branch0
+      - branch1
 
 steps:
   - powershell: echo "this is pla template"
   - bash: echo "hey"
-    condition: containsValue(${{ parameters.testParam }}, variables.SourceBranchName)
+    condition: containsValue(${{ parameters.testParam.branches }}, variables.SourceBranchName)
