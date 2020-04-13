@@ -17,8 +17,8 @@ variables:
   - group: my-vars-group
   - name: testvar
     value:
-      branch0
-      branch1
+      - branch0
+      - branch1
 
 jobs:
   - job: Run
