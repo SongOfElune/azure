@@ -32,6 +32,11 @@ jobs:
       - bash: echo "Build source branch name contains"
         condition: contains(variables['testvar'], variables['Build.SourceBranchName'])
       - template: platemplate.yml
+        parameters:
+          testParam:
+            - master
+            - pd/cvp/core/dev
+            - pd/cvp/release/release-1.0.0
       # - bash: echo "i am $(iam)"
       # - template: ${{ variables.prefix }}template.yml
       # - bash: echo "we are $(iam)"

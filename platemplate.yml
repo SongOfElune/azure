@@ -4,7 +4,6 @@ parameters:
   default:
     - branch0
     - branch1
-    - master
 
 steps:
   - powershell: echo "this is pla template"
