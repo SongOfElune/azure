@@ -3,8 +3,8 @@ parameters:
   type: object
   default:
     veracodeBranches:
-      branch0
-      branch1
+      - branch0
+      - branch1
 
 steps:
   - powershell: echo "this is pla template"
