@@ -26,9 +26,9 @@ jobs:
     #   env: 'dev'
     steps:
       - bash: echo "$(Build.SourceBranchName)"
-        name: Show build source branch name
+        displayName: Show build source branch name
       - bash: echo "$(Build.SourceBranch)"
-        name: Show build source branch
+        displayName: Show build source branch
       - bash: echo "Build source branch name contains"
         condition: contains(variables['testvar'], variables['Build.SourceBranchName'])
       # - bash: echo "i am $(iam)"
