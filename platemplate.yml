@@ -9,4 +9,4 @@ parameters:
 steps:
   - powershell: echo "this is pla template"
   - bash: echo "hey"
-    condition: containsValue(${{ parameters.testParam.branches }}, variables.SourceBranchName)
+    condition: containsValue(${{ parameters.testParam }}, variables.SourceBranchName)
