@@ -7,5 +7,5 @@ parameters:
 
 steps:
   - powershell: echo "this is pla template"
-  - ${{ if containsValue(${{ parameters.testParam }}, variables.SourceBranchName) }}:
+  - ${{ if containsValue(${{ parameters.testParam }}, variables['Build.SourceBranchName']) }}:
   - bash: echo "hey"
