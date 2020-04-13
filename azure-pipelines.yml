@@ -15,6 +15,9 @@ pool:
 variables:
   - template: variables.yml
   - group: my-vars-group
+  - testvar:
+    - branch0
+    - branch1
 
 jobs:
   - job: Run
@@ -23,9 +26,11 @@ jobs:
     #   env: 'dev'
     steps:
       - bash: echo "$(prefix)"
-      - bash: echo "i am $(iam)"
-      - template: ${{ variables.prefix }}template.yml
-      - bash: echo "we are $(iam)"
+      - bash: echo "good"
+        condition: in(variables['Build.SourceBranch'],join(variables['testvar']))
+      # - bash: echo "i am $(iam)"
+      # - template: ${{ variables.prefix }}template.yml
+      # - bash: echo "we are $(iam)"
       # - template: proxytemplate.yml
       #   parameters:
       #   ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
