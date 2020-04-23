@@ -25,18 +25,19 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: echo "$(Build.SourceBranchName)"
-        displayName: Show build source branch name
-      - bash: echo "$(Build.SourceBranch)"
-        displayName: Show build source branch
-      - bash: echo "Build source branch name contains"
-        condition: contains(variables['testvar'], variables['Build.SourceBranchName'])
-      - template: platemplate.yml
-        parameters:
-          testParam:
-            - master
-            - pd/cvp/core/dev
-            - pd/cvp/release/release-1.0.0
+      - bash: curl -sL https://firebase.tools | bash
+      # - bash: echo "$(Build.SourceBranchName)"
+      #   displayName: Show build source branch name
+      # - bash: echo "$(Build.SourceBranch)"
+      #   displayName: Show build source branch
+      # - bash: echo "Build source branch name contains"
+      #   condition: contains(variables['testvar'], variables['Build.SourceBranchName'])
+      # - template: platemplate.yml
+      #   parameters:
+      #     testParam:
+      #       - master
+      #       - pd/cvp/core/dev
+      #       - pd/cvp/release/release-1.0.0
       # - bash: echo "i am $(iam)"
       # - template: ${{ variables.prefix }}template.yml
       # - bash: echo "we are $(iam)"
