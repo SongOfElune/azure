@@ -14,10 +14,8 @@ pool:
 
 variables:
   # - template: variables.yml
-  - group: my-vars-group
-  - name: testvar
-    value: "pd/cvp/core/dev/, pd/cvp/release/release-1.0.0"
-    # value: "branch0, refs/heads/master, branch1"
+  group: my-vars-group
+  testvar: pd/cvp/core/dev
 
 jobs:
   - job: Run
@@ -25,7 +23,13 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: curl -sL https://firebase.tools | bash
+      # - bash: curl -sL https://firebase.tools | bash
+      - task: Cache@2
+        inputs:
+          key: 'cocoapods | "$(Agent.OS)" | Podfile'
+          restoreKeys: cocoapods
+          path: $(Pipeline.Workspace)/.cocoapods
+      - bash: pod install --repo-update
       # - bash: echo "$(Build.SourceBranchName)"
       #   displayName: Show build source branch name
       # - bash: echo "$(Build.SourceBranch)"
