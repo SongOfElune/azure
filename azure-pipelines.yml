@@ -24,12 +24,13 @@ jobs:
     #   env: 'dev'
     steps:
       # - bash: curl -sL https://firebase.tools | bash
-      - task: Cache@2
-        inputs:
-          key: 'cocoapods | "$(Agent.OS)" | Podfile'
-          restoreKeys: cocoapods
-          path: $(Pipeline.Workspace)/.cocoapods
-      - bash: pod install --repo-update
+      - bash: gem environment
+      # - task: Cache@2
+      #   inputs:
+      #     key: 'cocoapods | "$(Agent.OS)" | Podfile'
+      #     restoreKeys: cocoapods
+      #     path: $(Pipeline.Workspace)/.cocoapods
+      # - bash: pod install --repo-update
       # - bash: echo "$(Build.SourceBranchName)"
       #   displayName: Show build source branch name
       # - bash: echo "$(Build.SourceBranch)"
