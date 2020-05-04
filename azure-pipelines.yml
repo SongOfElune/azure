@@ -23,15 +23,16 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
+      - bash: java -version
       # - bash: curl -sL https://firebase.tools | bash
-      - bash: gem environment
-      - bash: |
-          echo "check /usr/local/lib/ruby/gems/2.6.0"
-          ls /usr/local/lib/ruby/gems/2.6.0/gems
-      - bash: gem install xcpretty
-      - bash: |
-          echo "check /usr/local/lib/ruby/gems/2.6.0"
-          ls /usr/local/lib/ruby/gems/2.6.0/gems
+      # - bash: gem environment
+      # - bash: |
+      #     echo "check /usr/local/lib/ruby/gems/2.6.0"
+      #     ls /usr/local/lib/ruby/gems/2.6.0/gems
+      # - bash: gem install xcpretty
+      # - bash: |
+      #     echo "check /usr/local/lib/ruby/gems/2.6.0"
+      #     ls /usr/local/lib/ruby/gems/2.6.0/gems
       # - task: Cache@2
       #   inputs:
       #     key: 'cocoapods | "$(Agent.OS)" | Podfile'
