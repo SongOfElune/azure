@@ -37,12 +37,12 @@ jobs:
     #   env: 'dev'
     steps:
       - bash: java -version
-      - pwsh: |
-          $buildType = $($(envname)).buildType
-          $buildConf = $($(envname)).buildConfiguration
+      # - pwsh: |
+      #     $buildType = $($(envname)).buildType
+      #     $buildConf = $($(envname)).buildConfiguration
 
-          write-host "build type is $buildType"
-          write-host "build conf is $buildConf"
+      #     write-host "build type is $buildType"
+      #     write-host "build conf is $buildConf"
         
       # - bash: curl -sL https://firebase.tools | bash
       # - bash: gem environment
