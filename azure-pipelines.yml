@@ -14,10 +14,12 @@ pool:
 
 variables:
   # - template: variables.yml
-  group: my-vars-group
-  group: test-vars
-  testvar: pd/cvp/core/dev
-  envname: cvp-dev
+  - group: my-vars-group
+  - group: test-vars
+  - name: testvar
+    value: pd/cvp/core/dev
+  - name: envname
+    value: cvp-dev
 
 jobs:
   - job: Run
