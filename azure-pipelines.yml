@@ -14,9 +14,8 @@ pool:
 
 variables:
   # - template: variables.yml
-  group: 
-  - my-vars-group
-  - test-vars
+  group: my-vars-group
+  group: test-vars
   testvar: pd/cvp/core/dev
   envname: cvp-dev
 
