@@ -39,7 +39,7 @@ jobs:
       - bash: java -version
       - pwsh: |
           $buildType = $($(envname)).buildType
-          $buildConf = $(envname).buildConfiguration
+          $buildConf = $($(envname)).buildConfiguration
 
           write-host "build type is $buildType"
           write-host "build conf is $buildConf"
