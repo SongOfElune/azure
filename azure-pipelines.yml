@@ -14,8 +14,11 @@ pool:
 
 variables:
   # - template: variables.yml
-  group: my-vars-group
+  group: 
+  - my-vars-group
+  - test-vars
   testvar: pd/cvp/core/dev
+  envname: cvp-dev
 
 jobs:
   - job: Run
@@ -24,6 +27,13 @@ jobs:
     #   env: 'dev'
     steps:
       - bash: java -version
+      - pwsh: |
+          $buildType = $(envname).buildType
+          $buildConf = $(envname).buildConfiguration
+
+          write-host "build type is $buildType"
+          write-host "build conf is $buildConf"
+        
       # - bash: curl -sL https://firebase.tools | bash
       # - bash: gem environment
       # - bash: |
