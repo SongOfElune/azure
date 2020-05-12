@@ -6,6 +6,15 @@
 #       - master
 #   always: true
 
+parameters:
+  - name: environmentName
+    displayName: Environment name
+    type: string
+    default: cvp-dev
+    values:
+    - cvp-dev
+    - cvp-stg
+
 trigger: none
 pr: none
 
@@ -29,7 +38,7 @@ jobs:
     steps:
       - bash: java -version
       - pwsh: |
-          $buildType = $(envname).buildType
+          $buildType = $($(envname)).buildType
           $buildConf = $(envname).buildConfiguration
 
           write-host "build type is $buildType"
