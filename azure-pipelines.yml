@@ -38,6 +38,11 @@ jobs:
     steps:
       - powershell: $PSVersionTable
       - bash: ls -la $(Pipeline.Workspace)
+      - bash: ls -la ~
+      - bash: echo 'test' > ./testfile
+      - bash: cp ./testfile ~
+      - bash: ls ~
+      - bash: cat ~/testfile
       # - pwsh: |
       #     $buildType = $($(envname)).buildType
       #     $buildConf = $($(envname)).buildConfiguration
