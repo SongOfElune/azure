@@ -37,7 +37,7 @@ jobs:
     #   env: 'dev'
     steps:
       - powershell: $PSVersionTable
-      - powershell: 1..5 | ForEach-Object { "Hello $_"; sleep 1 }
+      - bash: ls -la $(Pipeline.Workspace)
       # - pwsh: |
       #     $buildType = $($(envname)).buildType
       #     $buildConf = $($(envname)).buildConfiguration
