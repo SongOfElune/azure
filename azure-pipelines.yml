@@ -30,19 +30,21 @@ variables:
   - name: envname
     value: cvp-dev
 
+resources:
+ repositories:
+   - repository: pjava
+     type: github
+     name: SongOfElune/pipelines-java
+     endpoint: SongOfElune
+
 jobs:
   - job: Run
     # condition: in(variables['Build.Reason'], 'Schedule', 'IndividualCI', 'Manual')
     # variables:
     #   env: 'dev'
     steps:
-      - powershell: $PSVersionTable
       - bash: ls -la $(Pipeline.Workspace)
-      - bash: ls -la ~
-      - bash: echo 'test' > ./testfile
-      - bash: cp ./testfile ~
-      - bash: ls ~
-      - bash: cat ~/testfile
+      - bash: ls -la $(Pipeline.Workspace)/s
       # - pwsh: |
       #     $buildType = $($(envname)).buildType
       #     $buildConf = $($(envname)).buildConfiguration
