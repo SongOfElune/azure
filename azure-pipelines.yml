@@ -43,6 +43,12 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
+      - task: CopyFiles@2
+        inputs:
+         SourceFolder: ./@templates
+         Contents: '**.wtf'
+         TargetFolder: $(Pipeline.Workspace)/s
+          
       - bash: ls -la $(Pipeline.Workspace)
       - bash: ls -la $(Pipeline.Workspace)/s
       - bash: ls -la $(Build.SourcesDirectory)
