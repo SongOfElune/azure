@@ -45,6 +45,7 @@ jobs:
     steps:
       - bash: ls -la $(Pipeline.Workspace)
       - bash: ls -la $(Pipeline.Workspace)/s
+      - bash: ls -la $(Build.SourcesDirectory)
       # - pwsh: |
       #     $buildType = $($(envname)).buildType
       #     $buildConf = $($(envname)).buildConfiguration
