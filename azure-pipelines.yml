@@ -30,12 +30,12 @@ variables:
   - name: envname
     value: cvp-dev
 
-resources:
- repositories:
-   - repository: pjava
-     type: github
-     name: SongOfElune/pipelines-java
-     endpoint: SongOfElune
+# resources:
+#  repositories:
+#    - repository: pjava
+#      type: github
+#      name: SongOfElune/pipelines-java
+#      endpoint: SongOfElune
 
 jobs:
   - job: Run
@@ -44,11 +44,12 @@ jobs:
     #   env: 'dev'
     steps:
       - powershell: |
-          Write-Host "##vso[build.addbuildtag]test"
-          Write-Host "##vso[build.addbuildtag]test1"
-          Write-Host "##vso[build.addbuildtag]test1"
-          Write-Host "##vso[build.addbuildtag]"
-          Write-Host "##vso[build.addbuildtag]test2"
+          $a = 'test'
+          $b = ''
+          $c = 'test1'
+          Write-Host "##vso[build.addbuildtag]$a"
+          Write-Host "##vso[build.addbuildtag]$b"
+          Write-Host "##vso[build.addbuildtag]$c"
       # - bash: ls -la $(Pipeline.Workspace)
       # - bash: ls -la $(Pipeline.Workspace)/s
       # - bash: ls -la $(Build.SourcesDirectory)
