@@ -44,7 +44,6 @@ jobs:
     #   env: 'dev'
     steps:
       - powershell: |
-          $ErrorActionPreference = silentlycontinue
           $a = 'test'
           $b = ''
           $c = 'test1'
