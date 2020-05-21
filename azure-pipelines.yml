@@ -48,9 +48,9 @@ jobs:
           $a = 'test'
           $b = ''
           $c = 'test1'
-          Write-Host "##vso[build.addbuildtag]$a"
-          Write-Host "##vso[build.addbuildtag]$b"
-          Write-Host "##vso[build.addbuildtag]$c"
+          Write-Host "##vso[build.addbuildtag]$a" -ErrorAction SilentlyContinue
+          Write-Host "##vso[build.addbuildtag]$b" -ErrorAction SilentlyContinue
+          Write-Host "##vso[build.addbuildtag]$c" -ErrorAction SilentlyContinue
       - powershell: write-host "test"
       # - bash: ls -la $(Pipeline.Workspace)
       # - bash: ls -la $(Pipeline.Workspace)/s
