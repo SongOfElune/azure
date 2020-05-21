@@ -50,6 +50,7 @@ jobs:
           Write-Host "##vso[build.addbuildtag]$a"
           Write-Host "##vso[build.addbuildtag]$b"
           Write-Host "##vso[build.addbuildtag]$c"
+      - powershell: write-host "test"
       # - bash: ls -la $(Pipeline.Workspace)
       # - bash: ls -la $(Pipeline.Workspace)/s
       # - bash: ls -la $(Build.SourcesDirectory)
