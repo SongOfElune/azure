@@ -47,6 +47,7 @@ jobs:
           Write-Host "##vso[build.addbuildtag]test"
           Write-Host "##vso[build.addbuildtag]test1"
           Write-Host "##vso[build.addbuildtag]test1"
+          Write-Host "##vso[build.addbuildtag]"
           Write-Host "##vso[build.addbuildtag]test2"
       # - bash: ls -la $(Pipeline.Workspace)
       # - bash: ls -la $(Pipeline.Workspace)/s
