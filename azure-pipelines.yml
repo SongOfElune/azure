@@ -43,14 +43,14 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - powershell: |
-          $a = 'test'
-          $b = ''
-          $c = 'test1'
-          Write-Host "##vso[build.addbuildtag]$a" -ErrorAction SilentlyContinue
-          Write-Host "##vso[build.addbuildtag]$b" -ErrorAction SilentlyContinue
-          Write-Host "##vso[build.addbuildtag]$c" -ErrorAction SilentlyContinue
-      - powershell: write-host "test"
+      # - powershell: |
+      #     $a = 'test'
+      #     $b = ''
+      #     $c = 'test1'
+      #     Write-Host "##vso[build.addbuildtag]$a" -ErrorAction SilentlyContinue
+      #     Write-Host "##vso[build.addbuildtag]$b" -ErrorAction SilentlyContinue
+      #     Write-Host "##vso[build.addbuildtag]$c" -ErrorAction SilentlyContinue
+      - powershell: write-host "project is $(System.TeamProject)"
       # - bash: ls -la $(Pipeline.Workspace)
       # - bash: ls -la $(Pipeline.Workspace)/s
       # - bash: ls -la $(Build.SourcesDirectory)
