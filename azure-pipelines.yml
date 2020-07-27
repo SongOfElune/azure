@@ -1,10 +1,9 @@
 schedules:
-- cron: "0 4 * * * "
-  displayName: Run every day
-  branches:
-    include:
-      - master
-  always: true
+  - cron: "0 4 * * *"
+    branches:
+      include:
+        - master
+    always: true
 
 # parameters:
 #   - name: environmentName
