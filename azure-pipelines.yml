@@ -1,5 +1,5 @@
 schedules:
-  - cron: "0 1 * * *"
+  - cron: "1 * * * *"
     branches:
       include:
         - master
@@ -18,14 +18,13 @@ trigger: none
 pr: none
 
 pool:
-  vmImage: "macOS-10.15"
+  # vmImage: "macOS-10.15"
+  vmImage: "ubuntu-latest"
 
 variables:
   # - template: variables.yml
   # - group: my-vars-group
   # - group: test-vars
-  - name: testvar
-    value: pd/cvp/core/dev
   - name: envname
     value: cvp-dev
 
@@ -42,6 +41,10 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
+      - bash: echo "$(envvar)"
+        displayName: show yaml envvar
+      - bash: echo "$(testPipelineVar)"
+        displayName: show ui var
       # - powershell: |
       #     $a = 'test'
       #     $b = ''
@@ -49,7 +52,7 @@ jobs:
       #     Write-Host "##vso[build.addbuildtag]$a" -ErrorAction SilentlyContinue
       #     Write-Host "##vso[build.addbuildtag]$b" -ErrorAction SilentlyContinue
       #     Write-Host "##vso[build.addbuildtag]$c" -ErrorAction SilentlyContinue
-      - powershell: write-host "project is $(System.TeamProject)"
+      # - powershell: write-host "project is $(System.TeamProject)"
       # - bash: ls -la $(Pipeline.Workspace)
       # - bash: ls -la $(Pipeline.Workspace)/s
       # - bash: ls -la $(Build.SourcesDirectory)
