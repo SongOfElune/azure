@@ -1,9 +1,9 @@
-schedules:
-  - cron: "* * * * *"
-    branches:
-      include:
-        - master
-    always: true
+# schedules:
+#   - cron: "* * * * *"
+#     branches:
+#       include:
+#         - master
+#     always: true
 
 # parameters:
 #   - name: environmentName
