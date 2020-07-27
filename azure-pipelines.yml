@@ -41,7 +41,7 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: echo "$(envvar)"
+      - bash: echo "$(envname)"
         displayName: show yaml envvar
       - bash: echo "$(testPipelineVar)"
         displayName: show ui var
