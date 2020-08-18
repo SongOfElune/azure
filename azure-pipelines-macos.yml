@@ -10,5 +10,7 @@ pool:
   vmImage: 'macos-latest'
 
 steps:
+- script: sudo gem install fastlane -NV
+  displayName: Install fastlane
 - script: fastlane --version
   displayName: 'Show fastlane version'
