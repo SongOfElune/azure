@@ -11,7 +11,7 @@ pool:
 
 steps:
 # - script: sudo gem install fastlane -NV
-- script: fastlane run update_fastlane
+- script: brew install fastlane
   displayName: Update fastlane
 - script: fastlane --version
   displayName: 'Show fastlane version'
