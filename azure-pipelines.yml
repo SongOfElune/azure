@@ -49,8 +49,7 @@ jobs:
       - powershell: |
           $a = $(appsettings.buildTags)
           Write-Output $a
-          $b = $a.Split(,)
-          foreach ($l in $b.Split(',')) {
+          foreach ($l in $a.Split(',') {
             Write-Output "This is $l"
           }
       # - bash: echo "$(envname)"
