@@ -47,10 +47,10 @@ jobs:
           $c = "pa"
           $buildTags = "$a,$b,$c"
           echo "##vso[task.setvariable variable=teamId;isOutput=buildTags]$buildTags"
-        name: appsettings
+        name: Appsettings
         displayName: new vars
       - powershell: |
-          $a = "$(appsettings.buildTags)"
+          $a = "$(Appsettings.buildTags)"
           Write-Output $a
           foreach ($l in $a.Split(',')) {
             Write-Output "This is $l"
