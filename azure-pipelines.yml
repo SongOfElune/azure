@@ -41,10 +41,19 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: echo "$(envname)"
-        displayName: show yaml envvar
-      - bash: echo "$(testPipelineVar)"
-        displayName: show ui var
+      - powershell: |
+          $buildTags = @("a", "b", "c")
+          echo "##vso[task.setvariable variable=teamId;isOutput=buildTags]$buildTags"
+        name: appsettings
+        displayName: new vars
+      - powershell: |
+          foreach ($l in $(appsettings.buildTags)) {
+            Write-Output "This is $l"
+          }
+      # - bash: echo "$(envname)"
+      #   displayName: show yaml envvar
+      # - bash: echo "$(testPipelineVar)"
+      #   displayName: show ui var
       # - powershell: |
       #     $a = 'test'
       #     $b = ''
