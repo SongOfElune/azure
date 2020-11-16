@@ -42,7 +42,10 @@ jobs:
     #   env: 'dev'
     steps:
       - powershell: |
-          $buildTags = "a,b,c"
+          $a = "za"
+          $b = "lu"
+          $c = "pa"
+          $buildTags = "$a,$b,$c"
           echo "##vso[task.setvariable variable=teamId;isOutput=buildTags]$buildTags"
         name: appsettings
         displayName: new vars
