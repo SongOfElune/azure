@@ -18,8 +18,8 @@ trigger: none
 pr: none
 
 pool:
-  # vmImage: "macOS-10.15"
-  vmImage: "ubuntu-latest"
+  vmImage: "macOS-10.15"
+  # vmImage: "ubuntu-latest"
 
 variables:
   # - template: variables.yml
