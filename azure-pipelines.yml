@@ -42,12 +42,15 @@ jobs:
     #   env: 'dev'
     steps:
       - powershell: |
-          $buildTags = @("a", "b", "c")
+          $buildTags = "a,b,c"
           echo "##vso[task.setvariable variable=teamId;isOutput=buildTags]$buildTags"
         name: appsettings
         displayName: new vars
       - powershell: |
-          foreach ($l in $(appsettings.buildTags)) {
+          $a = $(appsettings.buildTags)
+          Write-Output $a
+          $b = $a.Split(,)
+          foreach ($l in $b.Split(',')) {
             Write-Output "This is $l"
           }
       # - bash: echo "$(envname)"
