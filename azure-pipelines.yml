@@ -46,7 +46,7 @@ jobs:
           $b = "lu"
           $c = "pa"
           $buildTags = "$a,$b,$c"
-          echo "##vso[task.setvariable variable=teamId;isOutput=buildTags]$buildTags"
+          echo "##vso[task.setvariable variable=buildTags;isOutput=true]$buildTags"
         name: Appsettings
         displayName: new vars
       - powershell: |
