@@ -47,7 +47,7 @@ jobs:
         name: appsettings
         displayName: new vars
       - powershell: |
-          $a = $(appsettings.buildTags)
+          $a = "$(appsettings.buildTags)"
           Write-Output $a
           foreach ($l in $a.Split(',')) {
             Write-Output "This is $l"
