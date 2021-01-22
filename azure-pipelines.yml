@@ -14,7 +14,10 @@
 #     - cvp-dev
 #     - cvp-stg
 
-trigger: none
+trigger: 
+ paths:
+   include:
+     - triggerfile
 pr: none
 
 pool:
@@ -41,20 +44,22 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - powershell: |
-          $a = "za"
-          $b = "lu"
-          $c = "pa"
-          $buildTags = "$a,$b,$c"
-          echo "##vso[task.setvariable variable=buildTags;isOutput=true]$buildTags"
-        name: Appsettings
-        displayName: new vars
-      - powershell: |
-          $a = "$(Appsettings.buildTags)"
-          Write-Output $a
-          foreach ($l in $a.Split(',')) {
-            Write-Output "This is $l"
-          }
+      - bash: cat $(Build.SourcesDirectory)/triggerfile
+        
+      # - powershell: |
+      #     $a = "za"
+      #     $b = "lu"
+      #     $c = "pa"
+      #     $buildTags = "$a,$b,$c"
+      #     echo "##vso[task.setvariable variable=buildTags;isOutput=true]$buildTags"
+      #   name: Appsettings
+      #   displayName: new vars
+      # - powershell: |
+      #     $a = "$(Appsettings.buildTags)"
+      #     Write-Output $a
+      #     foreach ($l in $a.Split(',')) {
+      #       Write-Output "This is $l"
+      #     }
       # - bash: echo "$(envname)"
       #   displayName: show yaml envvar
       # - bash: echo "$(testPipelineVar)"
