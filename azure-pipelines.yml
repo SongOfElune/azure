@@ -14,12 +14,13 @@
 #     - cvp-dev
 #     - cvp-stg
 
+
 trigger: 
  paths:
    include:
-     - triggerfile
+     - $(file)
 pr: none
-
+  
 pool:
   vmImage: "macOS-10.15"
   # vmImage: "ubuntu-latest"
@@ -30,6 +31,8 @@ variables:
   # - group: test-vars
   - name: envname
     value: cvp-dev
+  - name: file
+    value: ./triggerfile
 
 # resources:
 #  repositories:
