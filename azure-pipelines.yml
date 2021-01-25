@@ -60,6 +60,8 @@ jobs:
           SmtpServer: '$(smtp-server)'
           SmtpUsername: '$(smtp-username)'
           SmtpPassword: '$(smtp-password)'
+          Body: "ababababa"
+          SmtpPort: 587
         
       # - powershell: |
       #     $a = "za"
