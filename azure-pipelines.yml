@@ -16,9 +16,12 @@
 
 
 trigger: 
- paths:
-   include:
-     - $(file)
+  paths:
+    include:
+      - triggerfile
+  branches:
+    include:
+      - master
 pr: none
   
 pool:
@@ -31,8 +34,6 @@ variables:
   # - group: test-vars
   - name: envname
     value: cvp-dev
-  - name: file
-    value: ./triggerfile
 
 # resources:
 #  repositories:
