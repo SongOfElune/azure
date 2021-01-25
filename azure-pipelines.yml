@@ -30,7 +30,7 @@ pool:
 
 variables:
   # - template: variables.yml
-  # - group: my-vars-group
+  - group: my-vars-group
   # - group: test-vars
   - name: envname
     value: cvp-dev
@@ -49,6 +49,16 @@ jobs:
     #   env: 'dev'
     steps:
       - bash: cat $(Build.SourcesDirectory)/triggerfile
+      - task: SendEmail@1
+        inputs:
+          To: '$(smtp-to)'
+          From: '$(smtp-from)'
+          Subject: 'zlp plz'
+          BodyAsHtml: false
+          AddAttachment: false
+          SmtpServer: '$(smtp-server)'
+          SmtpUsername: '$(smtp-username)'
+          SmtpPassword: '$(smtp-password)'
         
       # - powershell: |
       #     $a = "za"
