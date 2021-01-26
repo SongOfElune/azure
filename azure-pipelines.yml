@@ -61,8 +61,8 @@ jobs:
           SmtpUsername: '$(smtp-username)'
           SmtpPassword: '$(smtp-password)'
           Body: |
-            "ababababa
-             SwaggerConfluence - https://ya.ru"
+            ababababa
+            SwaggerConfluence - $(Build.Repository.Uri)
           SmtpPort: 587
         
       # - powershell: |
