@@ -15,19 +15,19 @@
 #     - cvp-stg
 
 
-trigger: 
-  paths:
-    include:
-      - triggerfile
-  branches:
-    include:
-      - master
+trigger: none
+  # paths:
+    # include:
+      # - triggerfile
+  # branches:
+    # include:
+      # - master
 pr: none
   
 pool:
-  # vmImage: "macOS-10.15"
+  vmImage: "macOS-10.15"
   # vmImage: "ubuntu-latest"
-  vmImage: "windows-latest"
+  # vmImage: "windows-latest"
 
 variables:
   # - template: variables.yml
@@ -50,20 +50,21 @@ jobs:
     #   env: 'dev'
     steps:
       - pwsh: type $(Build.SourcesDirectory)/triggerfile
-      - task: SendEmail@1
-        inputs:
-          To: '$(smtp-to)'
-          From: '$(smtp-from)'
-          Subject: 'zlp plz'
-          BodyAsHtml: false
-          AddAttachment: false
-          SmtpServer: '$(smtp-server)'
-          SmtpUsername: '$(smtp-username)'
-          SmtpPassword: '$(smtp-password)'
-          Body: |
-            ababababa
-            SwaggerConfluence - $(Build.Repository.Uri)
-          SmtpPort: 587
+      - bash: fastlane --version
+      # - task: SendEmail@1
+      #   inputs:
+      #     To: '$(smtp-to)'
+      #     From: '$(smtp-from)'
+      #     Subject: 'zlp plz'
+      #     BodyAsHtml: false
+      #     AddAttachment: false
+      #     SmtpServer: '$(smtp-server)'
+      #     SmtpUsername: '$(smtp-username)'
+      #     SmtpPassword: '$(smtp-password)'
+      #     Body: |
+      #       ababababa
+      #       SwaggerConfluence - $(Build.Repository.Uri)
+      #     SmtpPort: 587
         
       # - powershell: |
       #     $a = "za"
