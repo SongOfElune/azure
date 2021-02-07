@@ -49,7 +49,7 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - pwsh: type $(Build.SourcesDirectory)/triggerfile
+      - bash: sudo gem install fastlane
       - bash: fastlane --version
       # - task: SendEmail@1
       #   inputs:
