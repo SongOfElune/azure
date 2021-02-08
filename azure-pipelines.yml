@@ -52,6 +52,7 @@ jobs:
       - bash: fastlane --version
       - bash: sudo gem install fastlane
       - bash: fastlane --version
+      - bash: env
       # - task: SendEmail@1
       #   inputs:
       #     To: '$(smtp-to)'
