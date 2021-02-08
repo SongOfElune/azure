@@ -49,6 +49,7 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
+      - bash: fastlane --version
       - bash: sudo gem install fastlane
       - bash: fastlane --version
       # - task: SendEmail@1
