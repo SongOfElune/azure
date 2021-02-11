@@ -5,15 +5,15 @@
 #         - master
 #     always: true
 
-# parameters:
-#   - name: environmentName
-#     displayName: Environment name
-#     type: string
-#     default: cvp-dev
-#     values:
-#     - cvp-dev
-#     - cvp-stg
-
+parameters:
+  - name: targetEnvironment
+    displayName: Environment name
+    type: string
+    default: cvp-dev
+    values:
+    - cvp-dev
+    - cvp-stg
+    - cvp-uat
 
 trigger: none
   # paths:
@@ -30,11 +30,23 @@ pool:
   # vmImage: "windows-latest"
 
 variables:
-  # - template: variables.yml
-  - group: my-vars-group
-  # - group: test-vars
-  - name: envname
-    value: cvp-dev
+  # # - template: variables.yml
+  # - group: my-vars-group
+  # # - group: test-vars
+  # - name: envname
+  #   value: cvp-dev
+  - name: Subscriptions
+    value: |      
+      @'
+        cvp-dev = 1
+        cvp-stg = 2
+        cvp-uat = 3
+        cvp     = 4
+        cvp-ept = 5
+        pla-stg = 6
+        pla-uat = 7
+        vst-dev = 8
+      '@
 
 # resources:
 #  repositories:
@@ -49,10 +61,18 @@ jobs:
     # variables:
     #   env: 'dev'
     steps:
-      - bash: fastlane --version
-      - bash: sudo gem install fastlane
-      - bash: fastlane --version
-      - bash: env
+      - powershell: |
+          $subscriptions = ConvertFrom-StringData -StringData $(Subscriptions)
+          Write-Host $subscriptions
+          $id = $subscriptions['${{parameters.targetEnvironment}}']
+          Write-Host $id
+          
+      # - bash: echo "$(Subscriptions.${{parameters.targetEnvironment}})"
+      # - bash: fastlane --version
+      # - bash: sudo gem install fastlane
+      # - bash: fastlane --version
+      # - bash: env
+
       # - task: SendEmail@1
       #   inputs:
       #     To: '$(smtp-to)'
