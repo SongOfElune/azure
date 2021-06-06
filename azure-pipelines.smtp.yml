@@ -1,0 +1,194 @@
+# schedules:
+#   - cron: "* * * * *"
+#     branches:
+#       include:
+#         - master
+#     always: true
+
+parameters:
+  - name: targetEnvironment
+    displayName: Environment name
+    type: string
+    default: cvp-dev
+    values:
+    - cvp-dev
+    - cvp-stg
+    - cvp-uat
+
+trigger: none
+  # paths:
+    # include:
+      # - triggerfile
+  # branches:
+    # include:
+      # - master
+pr: none
+  
+pool:
+  vmImage: "macOS-10.15"
+  # vmImage: "ubuntu-latest"
+  # vmImage: "windows-latest"
+
+variables:
+  # # - template: variables.yml
+  # - group: my-vars-group
+  # # - group: test-vars
+  # - name: envname
+  #   value: cvp-dev
+  - name: Subscriptions
+    value: |      
+      @'
+        cvp-dev = 1
+        cvp-stg = 2
+        cvp-uat = 3
+        cvp     = 4
+        cvp-ept = 5
+        pla-stg = 6
+        pla-uat = 7
+        vst-dev = 8
+      '@
+
+# resources:
+#  repositories:
+#    - repository: pjava
+#      type: github
+#      name: SongOfElune/pipelines-java
+#      endpoint: SongOfElune
+
+jobs:
+  - job: Run
+    # condition: in(variables['Build.Reason'], 'Schedule', 'IndividualCI', 'Manual')
+    # variables:
+    #   env: 'dev'
+    steps:
+      - powershell: |
+          $subscriptions = ConvertFrom-StringData -StringData $(Subscriptions)
+          Write-Host $subscriptions
+          $id = $subscriptions['${{parameters.targetEnvironment}}']
+          Write-Host $id
+          
+      # - bash: echo "$(Subscriptions.${{parameters.targetEnvironment}})"
+      # - bash: fastlane --version
+      # - bash: sudo gem install fastlane
+      # - bash: fastlane --version
+      # - bash: env
+
+      # - task: SendEmail@1
+      #   inputs:
+      #     To: '$(smtp-to)'
+      #     From: '$(smtp-from)'
+      #     Subject: 'zlp plz'
+      #     BodyAsHtml: false
+      #     AddAttachment: false
+      #     SmtpServer: '$(smtp-server)'
+      #     SmtpUsername: '$(smtp-username)'
+      #     SmtpPassword: '$(smtp-password)'
+      #     Body: |
+      #       ababababa
+      #       SwaggerConfluence - $(Build.Repository.Uri)
+      #     SmtpPort: 587
+        
+      # - powershell: |
+      #     $a = "za"
+      #     $b = "lu"
+      #     $c = "pa"
+      #     $buildTags = "$a,$b,$c"
+      #     echo "##vso[task.setvariable variable=buildTags;isOutput=true]$buildTags"
+      #   name: Appsettings
+      #   displayName: new vars
+      # - powershell: |
+      #     $a = "$(Appsettings.buildTags)"
+      #     Write-Output $a
+      #     foreach ($l in $a.Split(',')) {
+      #       Write-Output "This is $l"
+      #     }
+      # - bash: echo "$(envname)"
+      #   displayName: show yaml envvar
+      # - bash: echo "$(testPipelineVar)"
+      #   displayName: show ui var
+      # - powershell: |
+      #     $a = 'test'
+      #     $b = ''
+      #     $c = 'test1'
+      #     Write-Host "##vso[build.addbuildtag]$a" -ErrorAction SilentlyContinue
+      #     Write-Host "##vso[build.addbuildtag]$b" -ErrorAction SilentlyContinue
+      #     Write-Host "##vso[build.addbuildtag]$c" -ErrorAction SilentlyContinue
+      # - powershell: write-host "project is $(System.TeamProject)"
+      # - bash: ls -la $(Pipeline.Workspace)
+      # - bash: ls -la $(Pipeline.Workspace)/s
+      # - bash: ls -la $(Build.SourcesDirectory)
+      # - pwsh: |
+      #     $buildType = $($(envname)).buildType
+      #     $buildConf = $($(envname)).buildConfiguration
+
+      #     write-host "build type is $buildType"
+      #     write-host "build conf is $buildConf"
+        
+      # - bash: curl -sL https://firebase.tools | bash
+      # - bash: gem environment
+      # - bash: |
+      #     echo "check /usr/local/lib/ruby/gems/2.6.0"
+      #     ls /usr/local/lib/ruby/gems/2.6.0/gems
+      # - bash: gem install xcpretty
+      # - bash: |
+      #     echo "check /usr/local/lib/ruby/gems/2.6.0"
+      #     ls /usr/local/lib/ruby/gems/2.6.0/gems
+      # - task: Cache@2
+      #   inputs:
+      #     key: 'cocoapods | "$(Agent.OS)" | Podfile'
+      #     restoreKeys: cocoapods
+      #     path: $(Pipeline.Workspace)/.cocoapods
+      # - bash: pod install --repo-update
+      # - bash: echo "$(Build.SourceBranchName)"
+      #   displayName: Show build source branch name
+      # - bash: echo "$(Build.SourceBranch)"
+      #   displayName: Show build source branch
+      # - bash: echo "Build source branch name contains"
+      #   condition: contains(variables['testvar'], variables['Build.SourceBranchName'])
+      # - template: platemplate.yml
+      #   parameters:
+      #     testParam:
+      #       - master
+      #       - pd/cvp/core/dev
+      #       - pd/cvp/release/release-1.0.0
+      # - bash: echo "i am $(iam)"
+      # - template: ${{ variables.prefix }}template.yml
+      # - bash: echo "we are $(iam)"
+      # - template: proxytemplate.yml
+      #   parameters:
+      #   ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
+      #     project: 'PD'
+      #   ${{ if startsWith(variables['Build.DefinitionName'], 'PLA') }}:
+
+      # - ${{ if startsWith(variables['Build.DefinitionName'], 'PD') }}:
+      #   - powershell: echo "if PD"
+      #   - template: pdtemplate.yml
+      # - ${{ if eq(variables['prefix'], 'PLA') }}:
+      #   - powershell: echo "if PLA"
+      #   - template: platemplate.yml
+
+      # - powershell: |
+      #     $prefix = "$(Build.DefinitionName)".Split(".")[0]
+      #     echo "##vso[task.setvariable variable=prefix;isOutput=true]$prefix"
+      #   name: GetProject
+
+      # - powershell: echo "$(GetProject.prefix)"
+      # - bash: echo "$(prefix)"
+      # - template: "${{ variables.prefix }}template.yml"
+
+
+
+      # - template: proxytemplate.yml
+      #   parameters:
+      #     project: $(prefix)
+
+      # - bash: echo "$(Build.DefinitionName)"
+      # - bash: echo "$(Build.BuildUri)"
+      # - bash: env
+      # - template: template.yml
+      #   parameters:
+      #     yesNo: true
+      # - powershell: echo "this is master"
+      #   condition: eq(variables['Build.SourceBranch'], 'master')
+      # - checkout: none
+      # - bash: echo $(testBranch)
